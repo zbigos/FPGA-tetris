@@ -13,6 +13,7 @@
 module vga_pll(
 	input  clock_in,
 	output clock_out,
+	output pll_locked,
 	);
 
 	SB_PLL40_PAD #(
@@ -36,6 +37,7 @@ module vga_pll(
 		.DYNAMICDELAY(),
 		.RESETB(1'b1),
 		.BYPASS(1'b0),
+		.LOCK(pll_locked),
 		.LATCHINPUTVALUE(),
 	);
 

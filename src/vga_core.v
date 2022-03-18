@@ -46,13 +46,17 @@ module VGAcore
     wire h_drawing_pixels, v_drawing_pixels;
     assign drawing_pixels = h_drawing_pixels & v_drawing_pixels;
 
-    assign h_drawing_pixels = (hscan_pos >= 0 && hscan_pos < (NATIVE_HRES / RES_PRESCALER));
-    
-    assign h_sync = !((hscan_pos >= ((NATIVE_HRES + FRONT_PORCH_H) / RES_PRESCALER)) && (hscan_pos < ((NATIVE_HRES + FRONT_PORCH_H + SYNC_PULSE_H) / RES_PRESCALER)));
-    
-    assign v_drawing_pixels = (vscan_pos >= 0 && vscan_pos < NATIVE_VRES);
-    assign v_sync = !((vscan_pos >= (NATIVE_VRES + FRONT_PORCH_V)) && (vscan_pos < (NATIVE_VRES + FRONT_PORCH_V + SYNC_PULSE_V)));
+    reg h_drawing_pixels;
+    reg v_drawing_pixels;
+    reg h_sync;
+    reg v_sync;
+    /*
+    assign h_drawing_pixels = hscan_pos < (NATIVE_HRES / RES_PRESCALER);
+    assign v_drawing_pixels = vscan_pos < NATIVE_VRES;
 
+    assign h_sync = !((hscan_pos >= ((NATIVE_HRES + FRONT_PORCH_H) / RES_PRESCALER)) & (hscan_pos < ((NATIVE_HRES + FRONT_PORCH_H + SYNC_PULSE_H) / RES_PRESCALER)));
+    assign v_sync = !((vscan_pos >= (NATIVE_VRES + FRONT_PORCH_V)) & (vscan_pos < (NATIVE_VRES + FRONT_PORCH_V + SYNC_PULSE_V)));
+    */
     assign r = proposed_r & {(4){drawing_pixels}};
     assign b = proposed_b & {(4){drawing_pixels}};
     assign g = proposed_g & {(4){drawing_pixels}};
@@ -74,6 +78,12 @@ module VGAcore
             proposed_b[3:0] <= pixstream[11:8];
             hscan_pos <= hscan_pos + 1'b1;
 
+            h_drawing_pixels <= hscan_pos < (NATIVE_HRES / RES_PRESCALER);
+            v_drawing_pixels <= vscan_pos < NATIVE_VRES;
+
+            h_sync <= !((hscan_pos >= ((NATIVE_HRES + FRONT_PORCH_H) / RES_PRESCALER)) & (hscan_pos < ((NATIVE_HRES + FRONT_PORCH_H + SYNC_PULSE_H) / RES_PRESCALER)));
+            v_sync <= !((vscan_pos >= (NATIVE_VRES + FRONT_PORCH_V)) & (vscan_pos < (NATIVE_VRES + FRONT_PORCH_V + SYNC_PULSE_V)));
+    
             if (hscan_pos == ((NATIVE_HRES + FRONT_PORCH_H + SYNC_PULSE_H + BACK_PORCH_H) / RES_PRESCALER)) begin
                 hscan_pos <= 0;
                 vscan_pos <= vscan_pos + 1'b1;

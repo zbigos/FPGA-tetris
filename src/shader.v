@@ -6,7 +6,11 @@ module shader (
 );
 
     //wire on_edge = ((block_x == 0) | (block_x == 23) | (block_y == 0) | (block_y == 32));
+<<<<<<< HEAD
     wire on_edge = (block_x == 0) | (block_y == 0) | (block_y == 31) | (block_x == 25);
+=======
+    wire on_edge = (block_x <= 1) | (block_y == 0) | (block_y == 31) | (block_x >= 25);
+>>>>>>> e4c52b2 (uwu)
     wire in_center = (block_x > 3) & (block_x < 21) & (block_y > 3) & (block_y < 28);
     wire on_border = !(on_edge | in_center);
     wire border_top = block_x > block_y;

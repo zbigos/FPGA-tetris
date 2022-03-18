@@ -1,7 +1,11 @@
 # FPGA variables
 NAME = vga_tetris
 PROJECT = fpga/$(NAME)
+<<<<<<< HEAD
 SOURCES= src/vga_core.v src/vga_pll.v src/top.v src/gmanager.v src/shader.v src/mod24.v src/color_lut.v src/blockmemory.v
+=======
+SOURCES= src/meta_mem.v src/shifter.v src/meta_memrow.v src/meta_memcell.v src/vga_core.v src/timer.v src/volatile_cell_storage.v src/vga_pll.v src/tetron_I.v src/top.v src/gmanager.v src/shader.v src/mod24.v src/color_lut.v src/blockmemory.v
+>>>>>>> e4c52b2 (uwu)
 ICEBREAKER_DEVICE = hx8k
 ICEBREAKER_PIN_DEF = fpga/icoboard.pcf
 ICEBREAKER_PACKAGE = ct256
@@ -27,13 +31,17 @@ show_%: %.vcd %.gtkw
 # FPGA recipes
 
 show_synth_%: src/%.v
-	yosys -p "read_verilog $<; proc; opt; show -colors 2 -width -signed"
+	yosys -p "read_verilog $<; proc; opt; show -stretch -prefix count -colors 2 -width -signed"
 
 %.json: $(SOURCES)
 	yosys  -l fpga/yosys.log -p 'synth_ice40 -top top -json $(PROJECT).json' $(SOURCES)
 
 %.asc: %.json $(ICEBREAKER_PIN_DEF) 
-	nextpnr-ice40 -l fpga/nextpnr.log --seed $(SEED) --freq 26 --package $(ICEBREAKER_PACKAGE) --$(ICEBREAKER_DEVICE) --asc $@ --pcf $(ICEBREAKER_PIN_DEF) --json $<
+	nextpnr-ice40 -l fpga/nextpnr.log --seed $(SEED) --freq 30 --package $(ICEBREAKER_PACKAGE) --$(ICEBREAKER_DEVICE) --asc $@ --pcf $(ICEBREAKER_PIN_DEF) --json $<
+
+%.asc2: %.json $(ICEBREAKER_PIN_DEF) 
+	nextpnr-ice40 -l fpga/nextpnr.log --seed $(SEED) --freq 30 --package $(ICEBREAKER_PACKAGE) --$(ICEBREAKER_DEVICE) --asc $@ --pcf $(ICEBREAKER_PIN_DEF) --json fpga/vga_tetris.json --routed-svg routed.svg
+
 
 %.bin: %.asc
 	icepack $< $@
@@ -44,6 +52,10 @@ prog: $(PROJECT).bin
 	@echo "programming... zbyszek@"$(BOARD_ADDR) "icoprog -p <"$(BOARD_FPREF)/$(NAME).bin
 	ssh zbyszek@$(BOARD_ADDR) chmod 766 $(BOARD_FPREF)/$(NAME).bin
 	ssh zbyszek@$(BOARD_ADDR) ./flashit.sh
+
+
+killpi: $(PROJECT).bin
+	ssh zbyszek@$(BOARD_ADDR) sudo shutdown -t now
 # icoprog $<
 
 # general recipes

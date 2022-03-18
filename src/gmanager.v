@@ -5,8 +5,8 @@ module gmanager # (
     parameter NATIVE_HRES = 640,
     parameter NATIVE_VRES = 480,
     parameter RES_PRESCALER = 1,
-    parameter BLOCKS_VERTICAL = 11, //20
-    parameter BLOCKS_HORIZONTAL = 22, //10
+    parameter BLOCKS_VERTICAL = 12, //20
+    parameter BLOCKS_HORIZONTAL = 21, //10
     parameter VBLK_SIZE = 32,
     parameter HBLK_SIZE = 24
     
