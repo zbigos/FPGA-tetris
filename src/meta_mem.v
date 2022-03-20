@@ -28,7 +28,7 @@ module memory (
     input wire [5:0] hitbox_checker_3_y,
     output wire[3:0] hitbox_status,
 
-    input wire [22:0] rowfull_stat,
+    output wire [22:0] rowfull_stat,
     input wire [22:0] rowshift_cmd,
     
 );

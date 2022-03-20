@@ -61,10 +61,11 @@ module top(
     );
 
     wire movement_commit, movement_steal, movement_decline, movement_request, movement_intent;
-    assign led2 = movement_steal; // zielona z VGA
     assign led3 = movement_request;
 
     blkmemory memory(
+        .led1(led1),
+        .led2(led2),
         .clk(clk_25_175),
         .reset(reset),
         .core_busy(core_busy),
@@ -88,7 +89,7 @@ module top(
     );
 
     cellstorage vcell(
-        .led(led1),
+        .led(),
         .clk(clk_25_175),
         .reset(reset),
         .movement_commit(movement_commit),

@@ -5,6 +5,9 @@ module blkmemory # (
     parameter BLOCKS_VERTICAL = 12, //20
     parameter BLOCKS_HORIZONTAL = 21, //10    
 ) (
+    output wire led1,
+    output wire led2,
+
     input wire clk,
     input wire reset,
     input wire core_busy,
@@ -51,8 +54,14 @@ module blkmemory # (
 
     wire [22:0] rowfull;
     wire [22:0] rowshift;
-
+    
+    assign led1 = rowshift[19];
+    assign led2 = rowshift[20];
+    
     shifter sh(
+        .led1(),
+        .led2(),
+        
         .clk(clk),
         .rowfull(rowfull),
         .rowshift(rowshift),
@@ -103,8 +112,8 @@ module blkmemory # (
         end else begin
             if (resetperiod) begin  // what I'm indexing over y, has values 0-21
                 if (resetperiod_state < BLOCKS_HORIZONTAL) begin
-                    mm_colosetter_y <= resetperiod_state[5:0];
-                    mm_colosetter_x <= 5'd0;
+                    //mm_colosetter_y <= resetperiod_state[5:0];
+                    //mm_colosetter_x <= 5'd0;
                     resetperiod_state <= resetperiod_state + 1'b1;
                 end
                 if (resetperiod_state >= BLOCKS_HORIZONTAL & resetperiod_state < (BLOCKS_HORIZONTAL + BLOCKS_VERTICAL)) begin
@@ -113,8 +122,8 @@ module blkmemory # (
                     resetperiod_state <= resetperiod_state + 1'b1;
                 end
                 if (resetperiod_state >= (BLOCKS_HORIZONTAL + BLOCKS_VERTICAL) & resetperiod_state < (2*BLOCKS_HORIZONTAL + BLOCKS_VERTICAL)) begin
-                    mm_colosetter_y <= resetperiod_state[5:0] - (BLOCKS_HORIZONTAL + BLOCKS_VERTICAL);
-                    mm_colosetter_x <= 5'd11;
+                    //mm_colosetter_y <= resetperiod_state[5:0] - (BLOCKS_HORIZONTAL + BLOCKS_VERTICAL);
+                    //mm_colosetter_x <= 5'd11;
                     resetperiod_state <= resetperiod_state + 1'b1;
                 end
                 if (resetperiod_state >= (2*BLOCKS_HORIZONTAL + BLOCKS_VERTICAL)) begin
@@ -171,7 +180,12 @@ module blkmemory # (
                                     stealstatus <= 4'd4;
                                 end
 
-                                if (stealstatus == 4'd3) begin
+                                if (stealstatus == 4'd4) begin
+                                    stealstatus <= 4'd5;
+                                    mm_colorsetter_commit <= 1'b0;
+                                end
+
+                                if (stealstatus == 4'd5) begin
                                     movement_steal <= 1'b1;
                                 end
                             end
@@ -187,125 +201,3 @@ module blkmemory # (
     end
 
 endmodule
-<<<<<<< HEAD
-=======
-
-
-/*
-module blkmemory # (
-    parameter BLOCKS_VERTICAL = 12, //20
-    parameter BLOCKS_HORIZONTAL = 21, //10    
-) (
-    input wire clk,
-    input wire reset,
-    input wire core_busy,
-    input wire[4:0] vaddr,
-    input wire[4:0] haddr,
-    output wire [2:0] memval,
-    output reg collision,
-    output reg newblk,
-
-    input wire[4:0] P1blk_v,
-    input wire[4:0] P1blk_h,
-    input wire[4:0] P2blk_v,
-    input wire[4:0] P2blk_h,
-    input wire[4:0] P3blk_v,
-    input wire[4:0] P3blk_h,
-    input wire[4:0] P4blk_v,
-    input wire[4:0] P4blk_h,
-    input wire[2:0] volatile_blk_color,
-);
-
-    wire lookup_collision;
-    memory mem(
-        .clk(clk),
-        .reset(reset),
-        .memory_busy(core_busy),
-        .color_requestor_x(vaddr),
-        .color_requestor_y(haddr),
-        .color_getter(memval),
-        .color_set_requestor_x(),
-        .color_set_requestor_y(),
-        .color_commit(),
-        .color_setter(),
-        .hitbox_checker_0_x(P1blk_v),
-        .hitbox_checker_0_y(P1blk_h),
-        .hitbox_checker_1_x(P2blk_v),
-        .hitbox_checker_1_y(P2blk_h),
-        .hitbox_checker_2_x(P3blk_v),
-        .hitbox_checker_2_y(P3blk_h),
-        .hitbox_checker_3_x(P4blk_v),
-        .hitbox_checker_3_y(P4blk_h),
-        .hitbox_status(lookup_collision)
-    );
-
-    wire C1 = (vaddr == P1blk_v) & (haddr == P1blk_h);
-    wire C2 = (vaddr == P2blk_v) & (haddr == P2blk_h);
-    wire C3 = (vaddr == P3blk_v) & (haddr == P3blk_h);
-    wire C4 = (vaddr == P4blk_v) & (haddr == P4blk_h);
-    
-    reg collision, collision_wire;
-    integer i;
-    integer j;
-    integer k;
-    reg [4:0] ccount;
-
-
-    reg resetperiod;
-    reg [20:0] vblockfill_state;
-
-    always @(posedge clk) begin
-        if(!reset) begin
-            vreset <= 7'b0;
-            hreset <= 7'b0;
-            collision <= 1'b0;
-            collision_wire <= 1'b0;
-            ccount <= 5'd6;
-            resetperiod <= 1'b1;
-        end else begin
-            if (core_busy) begin
-                collision <= collision | collision_wire;
-
-                if (ccount == 5'd9) begin
-                    collision_wire <= lookup_collision & (gamemem[vaddr][haddr] != 3'b0);
-                    memval <= lookup_collision ? volatile_blk_color : gamemem[vaddr][haddr];
-                    if (collision | collision_wire) begin
-                        ccount <= 5'd0;
-                    end
-                end else if (ccount == 5'd0) begin
-                    gamemem[P1blk_v][P1blk_h - 1] <= volatile_blk_color + 1;
-                    ccount <= 5'd1;
-                end else if (ccount == 5'd1) begin
-                    gamemem[P2blk_v][P2blk_h - 1] <= volatile_blk_color + 1;
-                    ccount <= 5'd2;
-                end else if (ccount == 5'd2) begin
-                    gamemem[P3blk_v][P3blk_h - 1] <= volatile_blk_color + 1;
-                    ccount <= 5'd3;
-                end else if (ccount == 5'd3) begin
-                    gamemem[P4blk_v][P4blk_h - 1] <= volatile_blk_color + 1;
-                    ccount <= 5'd4;
-                end else if (ccount == 5'd4) begin
-                    ccount <= 5'd5;
-                    newblk <= 1'b1;
-                end else if (ccount == 5'd5) begin
-                    ccount <= 5'd6;
-                    newblk <= 1'b0;
-                end else if (ccount == 5'd6) begin
-                    ccount <= 5'd7;
-                end else if (ccount == 5'd7) begin
-                    ccount <= 5'd8;
-                    collision <= 1'b0;
-                    collision_wire <= 1'b0;
-                end else if (ccount == 5'd8) begin
-                    ccount <= 5'd9;
-                end
-            end else begin
-                for (k = 0; k < 21; k++) begin
-                    vblockfill_state[i] <= 1'b1;
-                end
-            end
-        end
-    end
-endmodule
-*/
->>>>>>> e4c52b2 (uwu)

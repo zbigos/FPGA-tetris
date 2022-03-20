@@ -25,12 +25,12 @@ Info: constrained 'btn' to bel 'X29/Y0/io0'
 Info: Packing constants..
 Info: Packing IOs..
 Info: Packing LUT-FFs..
-Info:     2812 LCs used as LUT4 only
-Info:      141 LCs used as LUT4 and DFF
+Info:     2648 LCs used as LUT4 only
+Info:      145 LCs used as LUT4 and DFF
 Info: Packing non-LUT FFs..
-Info:      946 LCs used as DFF only
+Info:      885 LCs used as DFF only
 Info: Packing carries..
-Info:      381 LCs used as CARRY only
+Info:      379 LCs used as CARRY only
 Info: Packing RAMs..
 Info: Placing PLLs..
 Info:   constrained PLL 'pll.pll_inst' to X16/Y0/pll_3
@@ -39,19 +39,19 @@ Info: Packing PLLs..
 Info:   PLL 'pll.pll_inst' has LOCK output, need to pass all outputs via LUT
 Info:   constrained 'resetn_gen_SB_DFF_Q_3_DFFLC' to X1/Y1/lc0
 Info: Promoting globals..
-Info: promoting reset_SB_LUT4_I3_O [reset] (fanout 994)
+Info: promoting reset_SB_LUT4_I3_O [reset] (fanout 930)
 Info: promoting t.trigger_SB_DFFE_Q_D_SB_LUT4_I2_O [reset] (fanout 25)
 Info: promoting reset [cen] (fanout 25)
-Info: promoting memory.mm_colosetter_y_SB_DFFESR_Q_D_SB_LUT4_O_I0_SB_LUT4_I1_O[3] [cen] (fanout 21)
+Info: promoting memory.resetperiod_SB_DFFSS_Q_D_SB_LUT4_O_I2_SB_LUT4_I1_O_SB_LUT4_I2_O [cen] (fanout 21)
 Info: Constraining chains...
-Info:       80 LCs used to legalise carry chains.
-Info: Checksum: 0xe1b4ffa1
+Info:       81 LCs used to legalise carry chains.
+Info: Checksum: 0x490bf7d9
 
 Info: Annotating ports with timing budgets for target frequency 30.00 MHz
-Info: Checksum: 0xb4212336
+Info: Checksum: 0xfd01794f
 
 Info: Device utilisation:
-Info: 	         ICESTORM_LC:  4362/ 7680    56%
+Info: 	         ICESTORM_LC:  4140/ 7680    53%
 Info: 	        ICESTORM_RAM:     0/   32     0%
 Info: 	               SB_IO:    22/  256     8%
 Info: 	               SB_GB:     5/    8    62%
@@ -59,339 +59,313 @@ Info: 	        ICESTORM_PLL:     1/    2    50%
 Info: 	         SB_WARMBOOT:     0/    1     0%
 
 Info: Placed 25 cells based on constraints.
-Info: Creating initial analytic placement for 3802 cells, random placement wirelen = 117002.
-Info:     at initial placer iter 0, wirelen = 776
-Info:     at initial placer iter 1, wirelen = 688
-Info:     at initial placer iter 2, wirelen = 663
-Info:     at initial placer iter 3, wirelen = 661
+Info: Creating initial analytic placement for 3583 cells, random placement wirelen = 109816.
+Info:     at initial placer iter 0, wirelen = 704
+Info:     at initial placer iter 1, wirelen = 789
+Info:     at initial placer iter 2, wirelen = 653
+Info:     at initial placer iter 3, wirelen = 649
 Info: Running main analytical placer.
-Info:     at iteration #1, type ALL: wirelen solved = 677, spread = 52107, legal = 53945; time = 0.14s
-Info:     at iteration #2, type ALL: wirelen solved = 1214, spread = 26709, legal = 28398; time = 0.09s
-Info:     at iteration #3, type ALL: wirelen solved = 2027, spread = 19764, legal = 21621; time = 0.09s
-Info:     at iteration #4, type ALL: wirelen solved = 3576, spread = 18501, legal = 20423; time = 0.10s
-Info:     at iteration #5, type ALL: wirelen solved = 5665, spread = 17097, legal = 18731; time = 0.08s
-Info:     at iteration #6, type ALL: wirelen solved = 6491, spread = 16454, legal = 18141; time = 0.06s
-Info:     at iteration #7, type ALL: wirelen solved = 6775, spread = 16128, legal = 18613; time = 0.08s
-Info:     at iteration #8, type ALL: wirelen solved = 7299, spread = 15844, legal = 18088; time = 0.07s
-Info:     at iteration #9, type ALL: wirelen solved = 7965, spread = 15804, legal = 17722; time = 0.05s
-Info:     at iteration #10, type ALL: wirelen solved = 8504, spread = 15231, legal = 16990; time = 0.06s
-Info:     at iteration #11, type ALL: wirelen solved = 8682, spread = 15189, legal = 16947; time = 0.08s
-Info:     at iteration #12, type ALL: wirelen solved = 9041, spread = 14905, legal = 16812; time = 0.06s
-Info:     at iteration #13, type ALL: wirelen solved = 9495, spread = 14516, legal = 16702; time = 0.07s
-Info:     at iteration #14, type ALL: wirelen solved = 9666, spread = 14365, legal = 16498; time = 0.08s
-Info:     at iteration #15, type ALL: wirelen solved = 9789, spread = 14137, legal = 16508; time = 0.07s
-Info:     at iteration #16, type ALL: wirelen solved = 10075, spread = 14221, legal = 16211; time = 0.05s
-Info:     at iteration #17, type ALL: wirelen solved = 10149, spread = 14171, legal = 16008; time = 0.06s
-Info:     at iteration #18, type ALL: wirelen solved = 10302, spread = 13904, legal = 15755; time = 0.06s
-Info:     at iteration #19, type ALL: wirelen solved = 10264, spread = 13834, legal = 15854; time = 0.05s
-Info:     at iteration #20, type ALL: wirelen solved = 10640, spread = 13891, legal = 15743; time = 0.07s
-Info:     at iteration #21, type ALL: wirelen solved = 10757, spread = 13785, legal = 15680; time = 0.04s
-Info:     at iteration #22, type ALL: wirelen solved = 10746, spread = 13702, legal = 15495; time = 0.04s
-Info:     at iteration #23, type ALL: wirelen solved = 10819, spread = 13780, legal = 15553; time = 0.07s
-Info:     at iteration #24, type ALL: wirelen solved = 11048, spread = 13746, legal = 15771; time = 0.09s
-Info:     at iteration #25, type ALL: wirelen solved = 11103, spread = 13751, legal = 15762; time = 0.05s
-Info:     at iteration #26, type ALL: wirelen solved = 11173, spread = 13728, legal = 15622; time = 0.07s
-Info:     at iteration #27, type ALL: wirelen solved = 11295, spread = 13794, legal = 15804; time = 0.07s
-Info: HeAP Placer Time: 2.47s
-Info:   of which solving equations: 1.42s
-Info:   of which spreading cells: 0.18s
-Info:   of which strict legalisation: 0.38s
+Info:     at iteration #1, type ALL: wirelen solved = 662, spread = 44166, legal = 45405; time = 0.11s
+Info:     at iteration #2, type ALL: wirelen solved = 1569, spread = 21665, legal = 23558; time = 0.07s
+Info:     at iteration #3, type ALL: wirelen solved = 2202, spread = 19578, legal = 21330; time = 0.06s
+Info:     at iteration #4, type ALL: wirelen solved = 3189, spread = 17932, legal = 19721; time = 0.06s
+Info:     at iteration #5, type ALL: wirelen solved = 4672, spread = 16016, legal = 18253; time = 0.05s
+Info:     at iteration #6, type ALL: wirelen solved = 5670, spread = 15221, legal = 17346; time = 0.06s
+Info:     at iteration #7, type ALL: wirelen solved = 6499, spread = 14629, legal = 16937; time = 0.06s
+Info:     at iteration #8, type ALL: wirelen solved = 6964, spread = 14358, legal = 16759; time = 0.07s
+Info:     at iteration #9, type ALL: wirelen solved = 7576, spread = 14556, legal = 16434; time = 0.05s
+Info:     at iteration #10, type ALL: wirelen solved = 8089, spread = 14160, legal = 15931; time = 0.04s
+Info:     at iteration #11, type ALL: wirelen solved = 8429, spread = 14242, legal = 15806; time = 0.07s
+Info:     at iteration #12, type ALL: wirelen solved = 8831, spread = 13931, legal = 15702; time = 0.04s
+Info:     at iteration #13, type ALL: wirelen solved = 9124, spread = 13646, legal = 15470; time = 0.05s
+Info:     at iteration #14, type ALL: wirelen solved = 8852, spread = 13462, legal = 15442; time = 0.05s
+Info:     at iteration #15, type ALL: wirelen solved = 9111, spread = 13517, legal = 15239; time = 0.08s
+Info:     at iteration #16, type ALL: wirelen solved = 9357, spread = 13677, legal = 15206; time = 0.04s
+Info:     at iteration #17, type ALL: wirelen solved = 9566, spread = 13575, legal = 15222; time = 0.05s
+Info:     at iteration #18, type ALL: wirelen solved = 9815, spread = 13393, legal = 15243; time = 0.05s
+Info:     at iteration #19, type ALL: wirelen solved = 9821, spread = 13236, legal = 14961; time = 0.05s
+Info:     at iteration #20, type ALL: wirelen solved = 10082, spread = 13429, legal = 14955; time = 0.04s
+Info:     at iteration #21, type ALL: wirelen solved = 10116, spread = 13403, legal = 14734; time = 0.07s
+Info:     at iteration #22, type ALL: wirelen solved = 10326, spread = 13340, legal = 14895; time = 0.04s
+Info:     at iteration #23, type ALL: wirelen solved = 10402, spread = 13460, legal = 14959; time = 0.05s
+Info:     at iteration #24, type ALL: wirelen solved = 10601, spread = 13357, legal = 15110; time = 0.07s
+Info:     at iteration #25, type ALL: wirelen solved = 10819, spread = 13492, legal = 15003; time = 0.05s
+Info:     at iteration #26, type ALL: wirelen solved = 10883, spread = 13495, legal = 15074; time = 0.05s
+Info: HeAP Placer Time: 1.93s
+Info:   of which solving equations: 1.04s
+Info:   of which spreading cells: 0.16s
+Info:   of which strict legalisation: 0.33s
 
 Info: Running simulated annealing placer for refinement.
-Info:   at iteration #1: temp = 0.000000, timing cost = 590, wirelen = 15495
-Info:   at iteration #5: temp = 0.000000, timing cost = 675, wirelen = 13516
-Info:   at iteration #10: temp = 0.000000, timing cost = 669, wirelen = 12872
-Info:   at iteration #15: temp = 0.000000, timing cost = 768, wirelen = 12452
-Info:   at iteration #20: temp = 0.000000, timing cost = 780, wirelen = 12299
-Info:   at iteration #25: temp = 0.000000, timing cost = 769, wirelen = 12236
-Info:   at iteration #26: temp = 0.000000, timing cost = 773, wirelen = 12217 
-Info: SA placement time 2.12s
+Info:   at iteration #1: temp = 0.000000, timing cost = 617, wirelen = 14734
+Info:   at iteration #5: temp = 0.000000, timing cost = 749, wirelen = 12692
+Info:   at iteration #10: temp = 0.000000, timing cost = 749, wirelen = 12044
+Info:   at iteration #15: temp = 0.000000, timing cost = 747, wirelen = 11705
+Info:   at iteration #20: temp = 0.000000, timing cost = 766, wirelen = 11520
+Info:   at iteration #25: temp = 0.000000, timing cost = 752, wirelen = 11462
+Info:   at iteration #30: temp = 0.000000, timing cost = 747, wirelen = 11433
+Info:   at iteration #33: temp = 0.000000, timing cost = 746, wirelen = 11420 
+Info: SA placement time 2.48s
 
-Info: Max frequency for clock 'clk_25_175': 38.16 MHz (PASS at 30.00 MHz)
+Info: Max frequency for clock 'clk_25_175': 37.92 MHz (PASS at 30.00 MHz)
 
-Info: Max delay <async>            -> posedge clk_25_175: 1.82 ns
-Info: Max delay posedge clk_25_175 -> <async>           : 5.84 ns
+Info: Max delay <async>            -> posedge clk_25_175: 1.95 ns
+Info: Max delay posedge clk_25_175 -> <async>           : 5.71 ns
 
 Info: Slack histogram:
-Info:  legend: * represents 15 endpoint(s)
-Info:          + represents [1,15) endpoint(s)
-Info: [  7128,   8386) |+
-Info: [  8386,   9644) |+
-Info: [  9644,  10902) | 
-Info: [ 10902,  12160) |+
-Info: [ 12160,  13418) |+
-Info: [ 13418,  14676) |**+
-Info: [ 14676,  15934) |*+
-Info: [ 15934,  17192) |+
-Info: [ 17192,  18450) |+
-Info: [ 18450,  19708) |+
-Info: [ 19708,  20966) | 
-Info: [ 20966,  22224) |+
-Info: [ 22224,  23482) |**+
-Info: [ 23482,  24740) |**+
-Info: [ 24740,  25998) |****************************************+
-Info: [ 25998,  27256) |************************************************************ 
-Info: [ 27256,  28514) |*********************+
-Info: [ 28514,  29772) |*****************************+
-Info: [ 29772,  31030) |*******************************+
-Info: [ 31030,  32288) |****************+
-Info: Checksum: 0xfbe51363
+Info:  legend: * represents 14 endpoint(s)
+Info:          + represents [1,14) endpoint(s)
+Info: [  6959,   8225) |+
+Info: [  8225,   9491) |+
+Info: [  9491,  10757) |+
+Info: [ 10757,  12023) |*+
+Info: [ 12023,  13289) |+
+Info: [ 13289,  14555) |***+
+Info: [ 14555,  15821) |+
+Info: [ 15821,  17087) | 
+Info: [ 17087,  18353) | 
+Info: [ 18353,  19619) | 
+Info: [ 19619,  20885) | 
+Info: [ 20885,  22151) |**+
+Info: [ 22151,  23417) |*+
+Info: [ 23417,  24683) |**************+
+Info: [ 24683,  25949) |*****************************************+
+Info: [ 25949,  27215) |************************************************************ 
+Info: [ 27215,  28481) |****************+
+Info: [ 28481,  29747) |**************************+
+Info: [ 29747,  31013) |*************************************+
+Info: [ 31013,  32279) |*******************+
+Info: Checksum: 0xa2a2eb21
 
 Info: Routing..
 Info: Setting up routing queue.
-Info: Routing 13271 arcs.
+Info: Routing 12599 arcs.
 Info:            |   (re-)routed arcs  |   delta    | remaining|       time spent     |
 Info:    IterCnt |  w/ripup   wo/ripup |  w/r  wo/r |      arcs| batch(sec) total(sec)|
-Info:       1000 |       40        698 |   40   698 |     12337|       0.12       0.12|
-Info:       2000 |       69       1481 |   29   783 |     11370|       0.19       0.31|
-Info:       3000 |      101       2449 |   32   968 |     10416|       0.26       0.57|
-Info:       4000 |      168       3382 |   67   933 |      9533|       0.24       0.81|
-Info:       5000 |      273       4277 |  105   895 |      8712|       0.17       0.99|
-Info:       6000 |      390       5160 |  117   883 |      7862|       0.09       1.08|
-Info:       7000 |      593       5957 |  203   797 |      7107|       0.13       1.21|
-Info:       8000 |      775       6775 |  182   818 |      6342|       0.13       1.34|
-Info:       9000 |     1009       7541 |  234   766 |      5669|       0.18       1.52|
-Info:      10000 |     1241       8309 |  232   768 |      5015|       0.19       1.72|
-Info:      11000 |     1507       9043 |  266   734 |      4429|       0.28       2.00|
-Info:      12000 |     1770       9780 |  263   737 |      3845|       0.34       2.34|
-Info:      13000 |     2108      10442 |  338   662 |      3364|       0.28       2.61|
-Info:      14000 |     2384      11166 |  276   724 |      2735|       0.32       2.93|
-Info:      15000 |     2593      11957 |  209   791 |      2083|       0.36       3.30|
-Info:      16000 |     2912      12638 |  319   681 |      1606|       0.34       3.63|
-Info:      17000 |     3261      13289 |  349   651 |      1197|       0.38       4.02|
-Info:      18000 |     3477      14073 |  216   784 |       506|       0.24       4.25|
-Info:      18565 |     3529      14587 |   52   514 |         0|       0.24       4.50|
+Info:       1000 |       27        866 |   27   866 |     11637|       0.19       0.19|
+Info:       2000 |       73       1481 |   46   615 |     10708|       0.11       0.30|
+Info:       3000 |      125       2429 |   52   948 |      9857|       0.18       0.48|
+Info:       4000 |      193       3361 |   68   932 |      8962|       0.14       0.62|
+Info:       5000 |      274       4280 |   81   919 |      8147|       0.22       0.84|
+Info:       6000 |      474       5080 |  200   800 |      7397|       0.15       1.00|
+Info:       7000 |      634       5920 |  160   840 |      6581|       0.09       1.09|
+Info:       8000 |      849       6705 |  215   785 |      5875|       0.13       1.22|
+Info:       9000 |     1023       7531 |  174   826 |      5077|       0.10       1.32|
+Info:      10000 |     1260       8294 |  237   763 |      4430|       0.22       1.54|
+Info:      11000 |     1581       8973 |  321   679 |      3919|       0.29       1.83|
+Info:      12000 |     1907       9647 |  326   674 |      3381|       0.30       2.13|
+Info:      13000 |     2268      10286 |  361   639 |      2871|       0.25       2.38|
+Info:      14000 |     2481      11073 |  213   787 |      2188|       0.37       2.76|
+Info:      15000 |     2762      11792 |  281   719 |      1626|       0.29       3.04|
+Info:      16000 |     3080      12474 |  318   682 |      1128|       0.35       3.40|
+Info:      17000 |     3397      13157 |  317   683 |       590|       0.28       3.68|
+Info:      17702 |     3478      13779 |   81   622 |         0|       0.31       3.99|
 Info: Routing complete.
-Info: Router1 time 4.50s
-Info: Checksum: 0x13962ee0
+Info: Router1 time 3.99s
+Info: Checksum: 0x7fc9aa44
 
 Info: Critical path report for clock 'clk_25_175' (posedge -> posedge):
 Info: curr total
-Info:  0.5  0.5  Source core.hreadwire_SB_DFFE_Q_6_DFFLC.O
-Info:  0.6  1.1    Net h_readwire[3] budget -0.211000 ns (19,10) -> (20,9)
-Info:                Sink $nextpnr_ICESTORM_LC_6.I1
+Info:  0.5  0.5  Source core.hreadwire_SB_DFFE_Q_2_DFFLC.O
+Info:  1.3  1.8    Net h_readwire[7] budget 0.000000 ns (18,3) -> (16,5)
+Info:                Sink game_manager.h.pposition_SB_LUT4_O_2_LC.I1
 Info:                Defined in:
 Info:                  src/top.v:22.16-22.26
-Info:  0.3  1.4  Source $nextpnr_ICESTORM_LC_6.COUT
-Info:  0.0  1.4    Net $nextpnr_ICESTORM_LC_6$O budget 0.000000 ns (20,9) -> (20,9)
-Info:                Sink game_manager.h.pposition_SB_LUT4_O_5_LC.CIN
-Info:  0.1  1.5  Source game_manager.h.pposition_SB_LUT4_O_5_LC.COUT
-Info:  0.0  1.5    Net game_manager.h.pposition_SB_LUT4_O_I3[2] budget 0.000000 ns (20,9) -> (20,9)
-Info:                Sink game_manager.h.pposition_SB_LUT4_O_4_LC.CIN
+Info:  0.3  2.1  Source game_manager.h.pposition_SB_LUT4_O_2_LC.COUT
+Info:  0.3  2.3    Net game_manager.h.pposition_SB_LUT4_O_I3[5] budget 0.260000 ns (16,5) -> (16,5)
+Info:                Sink game_manager.h.pposition_SB_LUT4_O_1_LC.I3
 Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
+Info:                  src/top.v:115.14-124.6
 Info:                  src/gmanager.v:43.29-43.43
 Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  1.6  Source game_manager.h.pposition_SB_LUT4_O_4_LC.COUT
-Info:  0.3  1.9    Net game_manager.h.pposition_SB_LUT4_O_I3[3] budget 0.260000 ns (20,9) -> (20,9)
-Info:                Sink game_manager.h.pposition_SB_LUT4_O_3_LC.I3
+Info:  0.3  2.6  Source game_manager.h.pposition_SB_LUT4_O_1_LC.O
+Info:  1.1  3.8    Net game_manager.ohreadwire[8] budget 0.000000 ns (16,5) -> (16,10)
+Info:                Sink memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO_I1_SB_LUT4_O_LC.I3
 Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
-Info:                  src/gmanager.v:43.29-43.43
-Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.3  2.2  Source game_manager.h.pposition_SB_LUT4_O_3_LC.O
-Info:  1.3  3.5    Net game_manager.ohreadwire[6] budget 0.000000 ns (20,9) -> (18,10)
-Info:                Sink game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I0_I3_SB_CARRY_CO_CI_SB_CARRY_CO_4_I1_SB_LUT4_O_1_LC.I3
+Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.3  4.1  Source memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO_I1_SB_LUT4_O_LC.O
+Info:  1.3  5.4    Net memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO_3_I1[4] budget 0.000000 ns (16,10) -> (17,5)
+Info:                Sink memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_I2_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO$CARRY.I2
 Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
-Info:                  src/mod24.v:15.60-15.84
-Info:                  src/gmanager.v:44.23-47.6
-Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.3  3.8  Source game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I0_I3_SB_CARRY_CO_CI_SB_CARRY_CO_4_I1_SB_LUT4_O_1_LC.O
-Info:  1.6  5.4    Net game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I0_I3_SB_CARRY_CO_CI_SB_CARRY_CO_3_I1[2] budget 0.000000 ns (18,10) -> (15,15)
-Info:                Sink game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO_2$CARRY.I2
-Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
+Info:                  src/top.v:115.14-124.6
 Info:                  src/mod24.v:15.36-15.55
 Info:                  src/gmanager.v:44.23-47.6
 Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:49.21-49.23
-Info:  0.2  5.7  Source game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO_2$CARRY.COUT
-Info:  0.0  5.7    Net game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3[6] budget 0.000000 ns (15,15) -> (15,15)
-Info:                Sink game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO_1$CARRY.CIN
+Info:  0.2  5.7  Source memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_I2_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO$CARRY.COUT
+Info:  0.0  5.7    Net memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_I2_SB_LUT4_O_I3[8] budget 0.000000 ns (17,5) -> (17,5)
+Info:                Sink memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_I2_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.CIN
 Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
+Info:                  src/top.v:115.14-124.6
 Info:                  src/mod24.v:15.36-15.55
 Info:                  src/gmanager.v:44.23-47.6
 Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  5.8  Source game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO_1$CARRY.COUT
-Info:  0.2  6.0    Net game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3[7] budget 0.190000 ns (15,15) -> (15,16)
-Info:                Sink game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO$CARRY.CIN
+Info:  0.1  5.8  Source memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_I2_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.COUT
+Info:  0.3  6.0    Net memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_I2_SB_LUT4_O_I2[3] budget 0.260000 ns (17,5) -> (17,5)
+Info:                Sink memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_I2_SB_LUT4_O_LC.I3
 Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
-Info:                  src/mod24.v:15.36-15.55
-Info:                  src/gmanager.v:44.23-47.6
-Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.1  Source game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO$CARRY.COUT
-Info:  0.0  6.1    Net game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3[8] budget 0.000000 ns (15,16) -> (15,16)
-Info:                Sink game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.CIN
-Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
-Info:                  src/mod24.v:15.36-15.55
-Info:                  src/gmanager.v:44.23-47.6
-Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.1  6.3  Source game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3_SB_CARRY_CO$CARRY.COUT
-Info:  0.3  6.5    Net game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_I3[9] budget 0.260000 ns (15,16) -> (15,16)
-Info:                Sink game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_LC.I3
-Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
+Info:                  src/top.v:115.14-124.6
 Info:                  src/mod24.v:15.36-15.55
 Info:                  src/gmanager.v:44.23-47.6
 Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:37.23-37.25
-Info:  0.3  6.8  Source game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3_SB_LUT4_O_LC.O
-Info:  1.6  8.4    Net game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_I3[3] budget 0.000000 ns (15,16) -> (20,14)
-Info:                Sink game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_LC.I3
+Info:  0.3  6.4  Source memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_I2_SB_LUT4_O_LC.O
+Info:  1.3  7.6    Net memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_I2[2] budget 0.000000 ns (17,5) -> (13,6)
+Info:                Sink memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_LC.I2
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.3  8.7  Source game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_LC.O
-Info:  1.3 10.0    Net game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_I3_SB_LUT4_I0_O[2] budget 0.000000 ns (20,14) -> (16,14)
-Info:                Sink game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_O_SB_LUT4_O_I2_SB_LUT4_I2_I1_SB_LUT4_I0_1_O_SB_LUT4_O_LC.I2
+Info:  0.4  8.0  Source memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_I3_I2_SB_LUT4_I3_LC.O
+Info:  0.6  8.6    Net memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_I2_O_SB_LUT4_O_1_I3_SB_LUT4_O_I2_SB_LUT4_I1_O[0] budget 0.000000 ns (13,6) -> (14,7)
+Info:                Sink memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_I2_O_SB_LUT4_O_1_I3_SB_LUT4_O_I2_SB_LUT4_I1_O_SB_LUT4_I3_LC.I2
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4 10.4  Source game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_O_SB_LUT4_O_I2_SB_LUT4_I2_I1_SB_LUT4_I0_1_O_SB_LUT4_O_LC.O
-Info:  1.3 11.7    Net game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_I3_SB_LUT4_O_I2_SB_LUT4_O_I0_SB_LUT4_O_I2_SB_LUT4_I1_O_SB_LUT4_O_I2_SB_LUT4_I2_I1_SB_LUT4_I0_1_O[2] budget 0.000000 ns (16,14) -> (14,13)
-Info:                Sink game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3_SB_LUT4_O_1_I2_SB_LUT4_O_LC.I3
+Info:  0.4  9.0  Source memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_I2_O_SB_LUT4_O_1_I3_SB_LUT4_O_I2_SB_LUT4_I1_O_SB_LUT4_I3_LC.O
+Info:  0.6  9.6    Net memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_I2_O_SB_LUT4_O_1_I3_SB_LUT4_O_I2_SB_LUT4_I1_O_SB_LUT4_I3_O[2] budget 0.000000 ns (14,7) -> (14,6)
+Info:                Sink memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_I2_O_SB_LUT4_O_1_I3_SB_LUT4_O_I2_SB_LUT4_I1_O_SB_LUT4_I3_O_SB_LUT4_I2_1_LC.I2
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.3 12.0  Source game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3_SB_LUT4_O_1_I2_SB_LUT4_O_LC.O
-Info:  0.6 12.6    Net game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3_SB_LUT4_O_1_I2[1] budget 0.000000 ns (14,13) -> (13,13)
-Info:                Sink game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3_SB_LUT4_O_1_I2_SB_LUT4_I2_2_LC.I2
+Info:  0.4  9.9  Source memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_O_1_I3_SB_LUT4_O_I3_SB_LUT4_I2_O_SB_LUT4_O_1_I3_SB_LUT4_O_I2_SB_LUT4_I1_O_SB_LUT4_I3_O_SB_LUT4_I2_1_LC.O
+Info:  1.3 11.3    Net memory.mem.row_10.cell_1.priv_mem_SB_LUT4_I3_O_SB_LUT4_O_1_I3[1] budget 0.000000 ns (14,6) -> (14,11)
+Info:                Sink memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I1_SB_LUT4_O_LC.I1
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4 12.9  Source game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3_SB_LUT4_O_1_I2_SB_LUT4_I2_2_LC.O
-Info:  0.6 13.5    Net game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3_SB_LUT4_O_1_I2_SB_LUT4_I3_O[1] budget 0.000000 ns (13,13) -> (14,14)
-Info:                Sink memory.mem.row_16.cell_0.priv_mem_SB_LUT4_I0_O_SB_LUT4_O_1_I2_SB_LUT4_I2_O_SB_LUT4_O_LC.I3
+Info:  0.4 11.7  Source memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I1_SB_LUT4_O_LC.O
+Info:  0.6 12.3    Net memory.proposed_memval_SB_LUT4_I2_I3_SB_LUT4_O_I0_SB_LUT4_O_3_I2_SB_LUT4_O_I3[0] budget 0.000000 ns (14,11) -> (13,12)
+Info:                Sink memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I1_SB_LUT4_I2_LC.I2
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.3 13.8  Source memory.mem.row_16.cell_0.priv_mem_SB_LUT4_I0_O_SB_LUT4_O_1_I2_SB_LUT4_I2_O_SB_LUT4_O_LC.O
-Info:  0.6 14.4    Net memory.memvalwire_SB_LUT4_O_1_I0_SB_LUT4_O_I0_SB_LUT4_O_I2[1] budget 0.000000 ns (14,14) -> (13,14)
-Info:                Sink game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3_SB_LUT4_I2_O_SB_LUT4_O_2_LC.I2
+Info:  0.4 12.6  Source memory.mem.row_0.cell_3.priv_mem_SB_LUT4_I0_1_O_SB_LUT4_O_1_I1_SB_LUT4_I2_LC.O
+Info:  0.6 13.2    Net game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3[2] budget 0.000000 ns (13,12) -> (14,11)
+Info:                Sink memory.mem.row_21.cell_3.priv_mem_SB_LUT4_I0_O_SB_LUT4_O_1_LC.I2
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4 14.8  Source game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3_SB_LUT4_I2_O_SB_LUT4_O_2_LC.O
-Info:  0.6 15.4    Net game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_2_I3_SB_LUT4_I2_O[2] budget 0.000000 ns (13,14) -> (14,14)
-Info:                Sink game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_LC.I2
+Info:  0.4 13.6  Source memory.mem.row_21.cell_3.priv_mem_SB_LUT4_I0_O_SB_LUT4_O_1_LC.O
+Info:  0.6 14.2    Net memory.mem.row_21.cell_1.priv_mem_SB_LUT4_I1_O[3] budget 0.000000 ns (14,11) -> (14,12)
+Info:                Sink game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_I1_SB_LUT4_O_1_LC.I2
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4 15.8  Source game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_LC.O
-Info:  1.6 17.4    Net game_manager.sh.block_x_SB_LUT4_O_I2[1] budget 0.000000 ns (14,14) -> (15,8)
+Info:  0.4 14.6  Source game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_I1_SB_LUT4_O_1_LC.O
+Info:  0.6 15.1    Net game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_I1[0] budget 0.000000 ns (14,12) -> (15,11)
+Info:                Sink game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_1_LC.I2
+Info:                Defined in:
+Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.4 15.5  Source game_manager.sh.block_x_SB_LUT4_O_I2_SB_LUT4_O_1_LC.O
+Info:  0.9 16.4    Net game_manager.sh.block_x_SB_LUT4_O_I2[1] budget 0.000000 ns (15,11) -> (18,11)
 Info:                Sink game_manager.sh.block_x_SB_LUT4_O_1_LC.I2
 Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
+Info:                  src/top.v:115.14-124.6
 Info:                  src/mod24.v:58.21-58.37
 Info:                  src/gmanager.v:49.26-53.6
 Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:49.21-49.23
-Info:  0.2 17.6  Source game_manager.sh.block_x_SB_LUT4_O_1_LC.COUT
-Info:  0.3 17.9    Net game_manager.sh.block_x_SB_LUT4_O_I3[2] budget 0.260000 ns (15,8) -> (15,8)
+Info:  0.2 16.7  Source game_manager.sh.block_x_SB_LUT4_O_1_LC.COUT
+Info:  0.3 16.9    Net game_manager.sh.block_x_SB_LUT4_O_I3[2] budget 0.260000 ns (18,11) -> (18,11)
 Info:                Sink game_manager.sh.block_x_SB_LUT4_O_LC.I3
 Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
+Info:                  src/top.v:115.14-124.6
 Info:                  src/mod24.v:58.21-58.37
 Info:                  src/gmanager.v:49.26-53.6
 Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:51.21-51.22
-Info:  0.3 18.2  Source game_manager.sh.block_x_SB_LUT4_O_LC.O
-Info:  1.0 19.2    Net game_manager.blkoffset_horizontal[5] budget 0.000000 ns (15,8) -> (16,5)
+Info:  0.3 17.2  Source game_manager.sh.block_x_SB_LUT4_O_LC.O
+Info:  0.6 17.8    Net game_manager.blkoffset_horizontal[5] budget 0.000000 ns (18,11) -> (19,10)
 Info:                Sink game_manager.sh.block_x_SB_LUT4_I3_LC.I3
 Info:                Defined in:
-Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.3 19.5  Source game_manager.sh.block_x_SB_LUT4_I3_LC.O
-Info:  0.6 20.1    Net game_manager.shaded_SB_LUT4_O_5_I3_SB_LUT4_O_I3_SB_CARRY_CO_CI_SB_CARRY_CO_2_I1[5] budget 0.000000 ns (16,5) -> (16,6)
-Info:                Sink game_manager.sh.block_y_SB_LUT4_I2_O_SB_LUT4_I1_I2_SB_CARRY_CO$CARRY.I2
+Info:                  src/top.v:115.14-124.6
+Info:                  src/shader.v:2.21-2.28
+Info:                  src/gmanager.v:55.12-60.6
+Info:  0.3 18.1  Source game_manager.sh.block_x_SB_LUT4_I3_LC.O
+Info:  0.6 18.7    Net game_manager.sh.block_x_SB_LUT4_I3_O[4] budget 0.000000 ns (19,10) -> (20,10)
+Info:                Sink game_manager.sh.block_y_SB_LUT4_I1_I3_SB_LUT4_O_I0_SB_LUT4_O_1_I2_SB_CARRY_CO$CARRY.I2
 Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
+Info:                  src/top.v:115.14-124.6
 Info:                  src/shader.v:12.23-12.40
 Info:                  src/gmanager.v:55.12-60.6
 Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:49.21-49.23
-Info:  0.2 20.3  Source game_manager.sh.block_y_SB_LUT4_I2_O_SB_LUT4_I1_I2_SB_CARRY_CO$CARRY.COUT
-Info:  0.3 20.6    Net $nextpnr_ICESTORM_LC_75$I3 budget 0.260000 ns (16,6) -> (16,6)
-Info:                Sink $nextpnr_ICESTORM_LC_75.I3
-Info:  0.3 20.9  Source $nextpnr_ICESTORM_LC_75.O
-Info:  0.6 21.5    Net game_manager.sh.block_y_SB_LUT4_I2_O_SB_LUT4_I1_I0[2] budget -2.604000 ns (16,6) -> (15,6)
-Info:                Sink game_manager.sh.block_y_SB_LUT4_I2_O_SB_LUT4_I1_LC.I2
+Info:  0.2 19.0  Source game_manager.sh.block_y_SB_LUT4_I1_I3_SB_LUT4_O_I0_SB_LUT4_O_1_I2_SB_CARRY_CO$CARRY.COUT
+Info:  0.3 19.2    Net $nextpnr_ICESTORM_LC_70$I3 budget 0.260000 ns (20,10) -> (20,10)
+Info:                Sink $nextpnr_ICESTORM_LC_70.I3
+Info:  0.3 19.5  Source $nextpnr_ICESTORM_LC_70.O
+Info:  0.6 20.1    Net game_manager.sh.block_y_SB_LUT4_I1_I3_SB_LUT4_O_I0_SB_LUT4_O_1_I2[4] budget -2.037000 ns (20,10) -> (20,11)
+Info:                Sink game_manager.sh.block_y_SB_LUT4_I1_I3_SB_LUT4_O_I0_SB_LUT4_O_1_LC.I2
 Info:                Defined in:
-Info:                  src/top.v:114.14-123.6
-Info:                  src/shader.v:9.21-9.33
-Info:                  src/gmanager.v:55.12-60.6
-Info:                  /usr/bin/../share/yosys/ice40/arith_map.v:37.23-37.25
-Info:  0.4 21.9  Source game_manager.sh.block_y_SB_LUT4_I2_O_SB_LUT4_I1_LC.O
-Info:  0.6 22.4    Net game_manager.sh.block_y_SB_LUT4_I2_O_SB_LUT4_I1_O[3] budget -0.239000 ns (15,6) -> (15,7)
+Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
+Info:  0.4 20.5  Source game_manager.sh.block_y_SB_LUT4_I1_I3_SB_LUT4_O_I0_SB_LUT4_O_1_LC.O
+Info:  0.6 21.1    Net game_manager.sh.block_y_SB_LUT4_I1_I3_SB_LUT4_O_I0[3] budget -0.243000 ns (20,11) -> (19,11)
 Info:                Sink game_manager.sh.block_y_SB_LUT4_I1_I3_SB_LUT4_O_LC.I3
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.3 22.8  Source game_manager.sh.block_y_SB_LUT4_I1_I3_SB_LUT4_O_LC.O
-Info:  1.3 24.0    Net game_manager.sh.block_y_SB_LUT4_I1_I3[2] budget 0.476000 ns (15,7) -> (18,4)
+Info:  0.3 21.4  Source game_manager.sh.block_y_SB_LUT4_I1_I3_SB_LUT4_O_LC.O
+Info:  1.3 22.7    Net game_manager.sh.block_y_SB_LUT4_I1_I3[2] budget 0.351000 ns (19,11) -> (19,7)
 Info:                Sink game_manager.sh.block_y_SB_LUT4_I1_LC.I3
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.3 24.3  Source game_manager.sh.block_y_SB_LUT4_I1_LC.O
-Info:  0.6 24.9    Net game_manager.shaded_SB_LUT4_O_5_I3[1] budget 0.610000 ns (18,4) -> (18,3)
+Info:  0.3 23.0  Source game_manager.sh.block_y_SB_LUT4_I1_LC.O
+Info:  0.6 23.6    Net game_manager.shaded_SB_LUT4_O_5_I3[1] budget 0.472000 ns (19,7) -> (19,8)
 Info:                Sink game_manager.shaded_SB_LUT4_O_5_I3_SB_LUT4_O_I2_SB_LUT4_O_LC.I3
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.3 25.2  Source game_manager.shaded_SB_LUT4_O_5_I3_SB_LUT4_O_I2_SB_LUT4_O_LC.O
-Info:  0.6 25.8    Net game_manager.shaded_SB_LUT4_O_5_I3_SB_LUT4_O_I2[1] budget 0.388000 ns (18,3) -> (17,4)
+Info:  0.3 23.9  Source game_manager.shaded_SB_LUT4_O_5_I3_SB_LUT4_O_I2_SB_LUT4_O_LC.O
+Info:  0.6 24.5    Net game_manager.shaded_SB_LUT4_O_5_I3_SB_LUT4_O_I2[1] budget 0.456000 ns (19,8) -> (19,9)
 Info:                Sink game_manager.shaded_SB_LUT4_O_5_I3_SB_LUT4_O_LC.I2
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4 26.2  Source game_manager.shaded_SB_LUT4_O_5_I3_SB_LUT4_O_LC.O
-Info:  0.6 26.8    Net game_manager.shaded_SB_LUT4_O_5_I3[2] budget 0.632000 ns (17,4) -> (18,3)
+Info:  0.4 24.9  Source game_manager.shaded_SB_LUT4_O_5_I3_SB_LUT4_O_LC.O
+Info:  1.3 26.2    Net game_manager.shaded_SB_LUT4_O_5_I3[2] budget 0.603000 ns (19,9) -> (19,4)
 Info:                Sink game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_LC.I2
 Info:                Defined in:
 Info:                  /usr/bin/../share/yosys/ice40/cells_map.v:6.21-6.22
-Info:  0.4 27.2  Setup game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_LC.I2
-Info: 8.6 ns logic, 18.6 ns routing
+Info:  0.4 26.6  Setup game_manager.pixstream_SB_DFFSR_Q_9_D_SB_LUT4_O_LC.I2
+Info: 8.7 ns logic, 18.0 ns routing
 
 Info: Critical path report for cross-domain path '<async>' -> 'posedge clk_25_175':
 Info: curr total
-Info:  0.0  0.0  Source butt2$sb_io.D_IN_0
-Info:  1.3  1.3    Net butt2$SB_IO_IN budget 32.865002 ns (6,33) -> (3,32)
-Info:                Sink vcell.buttdebounceT_SB_DFFSR_Q_DFFLC.I0
+Info:  0.0  0.0  Source butt3$sb_io.D_IN_0
+Info:  1.6  1.6    Net butt3$SB_IO_IN budget 32.865002 ns (7,33) -> (2,31)
+Info:                Sink vcell.buttdebounceR_SB_DFFSR_Q_DFFLC.I0
 Info:                Defined in:
-Info:                  src/top.v:90.17-112.6
-Info:                  src/volatile_cell_storage.v:10.16-10.21
-Info:  0.5  1.7  Setup vcell.buttdebounceT_SB_DFFSR_Q_DFFLC.I0
-Info: 0.5 ns logic, 1.3 ns routing
+Info:                  src/top.v:91.17-113.6
+Info:                  src/volatile_cell_storage.v:11.16-11.21
+Info:  0.5  2.1  Setup vcell.buttdebounceR_SB_DFFSR_Q_DFFLC.I0
+Info: 0.5 ns logic, 1.6 ns routing
 
 Info: Critical path report for cross-domain path 'posedge clk_25_175' -> '<async>':
 Info: curr total
 Info:  0.5  0.5  Source core.h_drawing_pixels_SB_DFFE_Q_D_SB_LUT4_O_LC.O
-Info:  2.2  2.7    Net core.h_drawing_pixels budget 15.800000 ns (20,2) -> (3,5)
+Info:  2.3  2.8    Net core.h_drawing_pixels budget 15.867000 ns (17,1) -> (7,8)
 Info:                Sink vga_g_SB_LUT4_O_2_LC.I2
 Info:                Defined in:
-Info:                  src/top.v:125.13-137.6
+Info:                  src/top.v:126.13-138.6
 Info:                  src/vga_core.v:46.10-46.26
-Info:  0.4  3.1  Source vga_g_SB_LUT4_O_2_LC.O
-Info:  2.5  5.6    Net vga_g[1]$SB_IO_OUT budget 14.988000 ns (3,5) -> (0,25)
+Info:  0.4  3.2  Source vga_g_SB_LUT4_O_2_LC.O
+Info:  2.8  6.0    Net vga_g[1]$SB_IO_OUT budget 15.021000 ns (7,8) -> (0,25)
 Info:                Sink vga_g[1]$sb_io.D_OUT_0
 Info:                Defined in:
 Info:                  src/top.v:16.21-16.26
-Info: 0.9 ns logic, 4.7 ns routing
+Info: 0.9 ns logic, 5.0 ns routing
 
-Info: Max frequency for clock 'clk_25_175': 36.76 MHz (PASS at 30.00 MHz)
+Info: Max frequency for clock 'clk_25_175': 37.53 MHz (PASS at 30.00 MHz)
 
-Info: Max delay <async>            -> posedge clk_25_175: 1.75 ns
-Info: Max delay posedge clk_25_175 -> <async>           : 5.61 ns
+Info: Max delay <async>            -> posedge clk_25_175: 2.11 ns
+Info: Max delay posedge clk_25_175 -> <async>           : 5.95 ns
 
 Info: Slack histogram:
-Info:  legend: * represents 23 endpoint(s)
-Info:          + represents [1,23) endpoint(s)
-Info: [  6131,   7439) |+
-Info: [  7439,   8747) |+
-Info: [  8747,  10055) |+
-Info: [ 10055,  11363) |+
-Info: [ 11363,  12671) |+
-Info: [ 12671,  13979) |*+
-Info: [ 13979,  15287) |+
-Info: [ 15287,  16595) |+
-Info: [ 16595,  17903) | 
-Info: [ 17903,  19211) | 
-Info: [ 19211,  20519) | 
-Info: [ 20519,  21827) |+
-Info: [ 21827,  23135) |+
-Info: [ 23135,  24443) |**+
-Info: [ 24443,  25751) |*********************+
-Info: [ 25751,  27059) |***************+
-Info: [ 27059,  28367) |***+
-Info: [ 28367,  29675) |************************************************************ 
-Info: [ 29675,  30983) |**********************+
-Info: [ 30983,  32291) |************+
+Info:  legend: * represents 21 endpoint(s)
+Info:          + represents [1,21) endpoint(s)
+Info: [  6690,   7970) |+
+Info: [  7970,   9250) |+
+Info: [  9250,  10530) |+
+Info: [ 10530,  11810) |+
+Info: [ 11810,  13090) |+
+Info: [ 13090,  14370) |*+
+Info: [ 14370,  15650) |+
+Info: [ 15650,  16930) | 
+Info: [ 16930,  18210) | 
+Info: [ 18210,  19490) | 
+Info: [ 19490,  20770) | 
+Info: [ 20770,  22050) |+
+Info: [ 22050,  23330) |*****+
+Info: [ 23330,  24610) |***************+
+Info: [ 24610,  25890) |**************+
+Info: [ 25890,  27170) |*******+
+Info: [ 27170,  28450) |****+
+Info: [ 28450,  29730) |************************************************************ 
+Info: [ 29730,  31010) |************************+
+Info: [ 31010,  32290) |*************+
 1 warning, 0 errors

@@ -1,11 +1,7 @@
 # FPGA variables
 NAME = vga_tetris
 PROJECT = fpga/$(NAME)
-<<<<<<< HEAD
-SOURCES= src/vga_core.v src/vga_pll.v src/top.v src/gmanager.v src/shader.v src/mod24.v src/color_lut.v src/blockmemory.v
-=======
-SOURCES= src/meta_mem.v src/shifter.v src/meta_memrow.v src/meta_memcell.v src/vga_core.v src/timer.v src/volatile_cell_storage.v src/vga_pll.v src/tetron_I.v src/top.v src/gmanager.v src/shader.v src/mod24.v src/color_lut.v src/blockmemory.v
->>>>>>> e4c52b2 (uwu)
+SOURCES= src/meta_mem.v src/tetron_T.v src/tetron_O.v src/tetron_Lb.v src/tetron_La.v src/shifter.v src/meta_memrow.v src/meta_memcell.v src/vga_core.v src/timer.v src/volatile_cell_storage.v src/vga_pll.v src/tetron_I.v src/top.v src/gmanager.v src/shader.v src/mod24.v src/color_lut.v src/blockmemory.v
 ICEBREAKER_DEVICE = hx8k
 ICEBREAKER_PIN_DEF = fpga/icoboard.pcf
 ICEBREAKER_PACKAGE = ct256

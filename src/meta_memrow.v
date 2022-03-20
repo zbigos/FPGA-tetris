@@ -52,13 +52,13 @@ module memcell_row (
 
     // color io
     output wire[2:0] gpu_color,
-    output wire[5:0] color_requestor
+    input wire[5:0] color_requestor
 );
 
-    wire [12:0] hitscan;
+    wire [11:0] hitscan;
     assign row_full = &(hitscan);
     assign hitbox_status = {hitscan[hitbox_checker_0], hitscan[hitbox_checker_1], hitscan[hitbox_checker_2], hitscan[hitbox_checker_3]};
-    assign gpu_color = (((color_requestor == 6'd0) ? cell_0_color : 3'd0)|((color_requestor == 6'd1) ? cell_1_color : 3'd0)|((color_requestor == 6'd2) ? cell_2_color : 3'd0)|((color_requestor == 6'd3) ? cell_3_color : 3'd0)|((color_requestor == 6'd4) ? cell_4_color : 3'd0)|((color_requestor == 6'd5) ? cell_5_color : 3'd0)|((color_requestor == 6'd6) ? cell_6_color : 3'd0)|((color_requestor == 6'd7) ? cell_7_color : 3'd0)|((color_requestor == 6'd8) ? cell_8_color : 3'd0)|((color_requestor == 6'd9) ? cell_9_color : 3'd0)|((color_requestor == 6'd10) ? cell_10_color : 3'd0)|((color_requestor == 6'd11) ? cell_11_color : 3'd0)|((color_requestor == 6'd12) ? cell_12_color : 3'd0));
+    assign gpu_color = (((color_requestor == 6'd0) ? cell_0_color : 3'd0)|((color_requestor == 6'd1) ? cell_1_color : 3'd0)|((color_requestor == 6'd2) ? cell_2_color : 3'd0)|((color_requestor == 6'd3) ? cell_3_color : 3'd0)|((color_requestor == 6'd4) ? cell_4_color : 3'd0)|((color_requestor == 6'd5) ? cell_5_color : 3'd0)|((color_requestor == 6'd6) ? cell_6_color : 3'd0)|((color_requestor == 6'd7) ? cell_7_color : 3'd0)|((color_requestor == 6'd8) ? cell_8_color : 3'd0)|((color_requestor == 6'd9) ? cell_9_color : 3'd0)|((color_requestor == 6'd10) ? cell_10_color : 3'd0)|((color_requestor == 6'd11) ? cell_11_color : 3'd0));
 
 
     wire [2:0] cell_0_color;
@@ -216,19 +216,4 @@ module memcell_row (
         .my_color(cell_11_color),
         .cell_occ(hitscan[11])
     );
-
-    wire [2:0] cell_12_color;
-    memcell cell_12(
-        .clk(clk),
-        .reset(reset),
-        .advance(advance_row),
-        .prev_cell(rowswap_read_cell_12),
-        .myself(rowswap_write_cell_12),
-        .write(write_commiter & (write_row_selector == 5'd12)),
-        .set_my_color(color_setter),
-        .my_color(cell_12_color),
-        .cell_occ(hitscan[12])
-    );
-
-
 endmodule
