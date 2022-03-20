@@ -7,7 +7,7 @@ module blkmemory # (
 ) (
     output wire led1,
     output wire led2,
-
+    output wire[7:0] debugled,
     input wire clk,
     input wire reset,
     input wire core_busy,
@@ -55,16 +55,14 @@ module blkmemory # (
     wire [22:0] rowfull;
     wire [22:0] rowshift;
     
-    assign led1 = rowshift[19];
-    assign led2 = rowshift[20];
-    
+    assign led1 = mm_colorsetter_commit;
+    assign debugled = rowshift[15:22];
+
     shifter sh(
-        .led1(),
-        .led2(),
-        
+        .debugled(),        
         .clk(clk),
         .rowfull(rowfull),
-        .rowshift(rowshift),
+        .rowshift(rowshift)
     );
 
     memory mem(

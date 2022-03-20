@@ -7,6 +7,7 @@ module top(
     output led1,
     output led2,
     output led3,
+    output wire[7:0] DEBUGLED,
     input butt1,
     input butt2,
     input butt3,
@@ -64,6 +65,7 @@ module top(
     assign led3 = movement_request;
 
     blkmemory memory(
+        .debugled(DEBUGLED),
         .led1(led1),
         .led2(led2),
         .clk(clk_25_175),

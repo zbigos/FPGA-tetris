@@ -32,8 +32,6 @@ module memory (
     input wire [22:0] rowshift_cmd,
     
 );
-    assign rowshift_cmd = 23'b0;
-
 
     wire [22:0] hitscan0;
     wire [22:0] hitscan1;

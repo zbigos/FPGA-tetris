@@ -10,6 +10,18 @@ set_io --warn-no-port butt1 B3
 set_io --warn-no-port butt2 B4
 set_io --warn-no-port butt3 B5
 
+set_io -nowarn DEBUGLED[0]  D8
+set_io -nowarn DEBUGLED[1]  B9
+set_io -nowarn DEBUGLED[2]  B10
+set_io -nowarn DEBUGLED[3]  B11
+
+set_io -nowarn DEBUGLED[7]  B8
+set_io -nowarn DEBUGLED[6]  A9
+set_io -nowarn DEBUGLED[5]  A10
+set_io -nowarn DEBUGLED[4]  A11
+
+
+
 
 # RS232
 # set_io -nowarn RX          6
