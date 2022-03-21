@@ -49,16 +49,20 @@ module cellstorage(
     wire [4:0] lbtetron_blk_v [4:0];
     wire [4:0] ttetron_blk_h [4:0];
     wire [4:0] ttetron_blk_v [4:0];
+    wire [4:0] satetron_blk_h [4:0];
+    wire [4:0] satetron_blk_v [4:0];
+    wire [4:0] sbtetron_blk_h [4:0];
+    wire [4:0] sbtetron_blk_v [4:0];
 
 
-    assign P1blk_v = tetron_v + itetron_blk_v[0] + otetron_blk_v[0] + latetron_blk_v[0] + lbtetron_blk_v[0] + ttetron_blk_v[0];
-    assign P2blk_v = tetron_v + itetron_blk_v[1] + otetron_blk_v[1] + latetron_blk_v[1] + lbtetron_blk_v[1] + ttetron_blk_v[1];
-    assign P3blk_v = tetron_v + itetron_blk_v[2] + otetron_blk_v[2] + latetron_blk_v[2] + lbtetron_blk_v[2] + ttetron_blk_v[2];
-    assign P4blk_v = tetron_v + itetron_blk_v[3] + otetron_blk_v[3] + latetron_blk_v[3] + lbtetron_blk_v[3] + ttetron_blk_v[3];
-    assign P1blk_h = tetron_h + itetron_blk_h[0] + otetron_blk_h[0] + latetron_blk_h[0] + lbtetron_blk_h[0] + ttetron_blk_h[0];
-    assign P2blk_h = tetron_h + itetron_blk_h[1] + otetron_blk_h[1] + latetron_blk_h[1] + lbtetron_blk_h[1] + ttetron_blk_h[1];
-    assign P3blk_h = tetron_h + itetron_blk_h[2] + otetron_blk_h[2] + latetron_blk_h[2] + lbtetron_blk_h[2] + ttetron_blk_h[2];
-    assign P4blk_h = tetron_h + itetron_blk_h[3] + otetron_blk_h[3] + latetron_blk_h[3] + lbtetron_blk_h[3] + ttetron_blk_h[3];
+    assign P1blk_v = tetron_v + itetron_blk_v[0] + otetron_blk_v[0] + latetron_blk_v[0] + lbtetron_blk_v[0] + ttetron_blk_v[0] + satetron_blk_v[0] + sbtetron_blk_v[0];
+    assign P2blk_v = tetron_v + itetron_blk_v[1] + otetron_blk_v[1] + latetron_blk_v[1] + lbtetron_blk_v[1] + ttetron_blk_v[1] + satetron_blk_v[1] + sbtetron_blk_v[1];
+    assign P3blk_v = tetron_v + itetron_blk_v[2] + otetron_blk_v[2] + latetron_blk_v[2] + lbtetron_blk_v[2] + ttetron_blk_v[2] + satetron_blk_v[2] + sbtetron_blk_v[2];
+    assign P4blk_v = tetron_v + itetron_blk_v[3] + otetron_blk_v[3] + latetron_blk_v[3] + lbtetron_blk_v[3] + ttetron_blk_v[3] + satetron_blk_v[3] + sbtetron_blk_v[3];
+    assign P1blk_h = tetron_h + itetron_blk_h[0] + otetron_blk_h[0] + latetron_blk_h[0] + lbtetron_blk_h[0] + ttetron_blk_h[0] + satetron_blk_h[0] + sbtetron_blk_h[0];
+    assign P2blk_h = tetron_h + itetron_blk_h[1] + otetron_blk_h[1] + latetron_blk_h[1] + lbtetron_blk_h[1] + ttetron_blk_h[1] + satetron_blk_h[1] + sbtetron_blk_h[1];
+    assign P3blk_h = tetron_h + itetron_blk_h[2] + otetron_blk_h[2] + latetron_blk_h[2] + lbtetron_blk_h[2] + ttetron_blk_h[2] + satetron_blk_h[2] + sbtetron_blk_h[2];
+    assign P4blk_h = tetron_h + itetron_blk_h[3] + otetron_blk_h[3] + latetron_blk_h[3] + lbtetron_blk_h[3] + ttetron_blk_h[3] + satetron_blk_h[3] + sbtetron_blk_h[3];
     
     tetron_I_shaper ishaper(
         .clk(clk),
@@ -111,6 +115,27 @@ module cellstorage(
         .blk4_voffset(ttetron_blk_v[3]), .blk4_hoffset(ttetron_blk_h[3])
     );
 
+    tetron_Sa_shaper sashaper(
+        .clk(clk),
+        .active(tetron_type == 3'd5),
+        .tetron_rotation(tetron_rotation),
+        .blk1_voffset(satetron_blk_v[0]), .blk1_hoffset(satetron_blk_h[0]),
+        .blk2_voffset(satetron_blk_v[1]), .blk2_hoffset(satetron_blk_h[1]),
+        .blk3_voffset(satetron_blk_v[2]), .blk3_hoffset(satetron_blk_h[2]),
+        .blk4_voffset(satetron_blk_v[3]), .blk4_hoffset(satetron_blk_h[3])
+    );
+
+    tetron_Sb_shaper sbshaper(
+        .clk(clk),
+        .active(tetron_type == 3'd6),
+        .tetron_rotation(tetron_rotation),
+        .blk1_voffset(sbtetron_blk_v[0]), .blk1_hoffset(sbtetron_blk_h[0]),
+        .blk2_voffset(sbtetron_blk_v[1]), .blk2_hoffset(sbtetron_blk_h[1]),
+        .blk3_voffset(sbtetron_blk_v[2]), .blk3_hoffset(sbtetron_blk_h[2]),
+        .blk4_voffset(sbtetron_blk_v[3]), .blk4_hoffset(sbtetron_blk_h[3])
+    );
+
+
     reg movement_available;
     reg [5:0] cooldown;
     reg postdecline_cool;
@@ -128,7 +153,7 @@ module cellstorage(
         if (!reset) begin
             process_decline <= 1'b0;
             cooldown <= 1'b0;
-            tetron_type <= 3'd0;
+            tetron_type <= 3'd6;
             tetron_v <= 4'd5;
             tetron_h <= 4'd5;
             keep_tetron_v <= 4'd5;
@@ -234,7 +259,7 @@ module cellstorage(
                     tetron_h <= 4'd0;
                     tetron_v <= 4'd5;
                     volatile_blk_color <= (state[2:0] == 3'b0) ? 3'b101 : state[2:0];
-                    tetron_type <= 3'd0; //(state % 16) % 5;
+                    tetron_type <= 3'd6; //(state % 16) % 5;
                     movement_available <= 1'b1;
                     process_steal <= 1'b0;
                     keep_tetron_rotation <= 3'b0;
