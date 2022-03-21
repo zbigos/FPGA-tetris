@@ -17,7 +17,7 @@ module memcell (
     reg [2: 0] priv_mem;
     assign my_color = priv_mem;
     assign myself = priv_mem;
-    assign cell_occ = priv_mem != 3'b0;
+    assign cell_occ = priv_mem != 3'b000;
 
     always @(posedge clk) begin
         if(!reset) begin

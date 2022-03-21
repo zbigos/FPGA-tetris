@@ -16,8 +16,7 @@ module memcell_row (
     input wire[2:0] rowswap_read_cell_8,
     input wire[2:0] rowswap_read_cell_9,
     input wire[2:0] rowswap_read_cell_10,
-    input wire[2:0] rowswap_read_cell_11,
-    input wire[2:0] rowswap_read_cell_12, 
+    input wire[2:0] rowswap_read_cell_11, 
     // generate swap wires (outbound)
     output wire[2:0] rowswap_write_cell_0,
     output wire[2:0] rowswap_write_cell_1,
@@ -31,7 +30,6 @@ module memcell_row (
     output wire[2:0] rowswap_write_cell_9,
     output wire[2:0] rowswap_write_cell_10,
     output wire[2:0] rowswap_write_cell_11,
-    output wire[2:0] rowswap_write_cell_12,
 
     // what color to write
     input wire[2:0] color_setter,
@@ -65,7 +63,7 @@ module memcell_row (
     memcell cell_0(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b0),
         .prev_cell(rowswap_read_cell_0),
         .myself(rowswap_write_cell_0),
         .write(write_commiter & (write_row_selector == 5'd0)),
@@ -78,7 +76,7 @@ module memcell_row (
     memcell cell_1(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_1),
         .myself(rowswap_write_cell_1),
         .write(write_commiter & (write_row_selector == 5'd1)),
@@ -91,7 +89,7 @@ module memcell_row (
     memcell cell_2(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_2),
         .myself(rowswap_write_cell_2),
         .write(write_commiter & (write_row_selector == 5'd2)),
@@ -104,7 +102,7 @@ module memcell_row (
     memcell cell_3(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_3),
         .myself(rowswap_write_cell_3),
         .write(write_commiter & (write_row_selector == 5'd3)),
@@ -117,7 +115,7 @@ module memcell_row (
     memcell cell_4(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_4),
         .myself(rowswap_write_cell_4),
         .write(write_commiter & (write_row_selector == 5'd4)),
@@ -130,7 +128,7 @@ module memcell_row (
     memcell cell_5(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_5),
         .myself(rowswap_write_cell_5),
         .write(write_commiter & (write_row_selector == 5'd5)),
@@ -143,7 +141,7 @@ module memcell_row (
     memcell cell_6(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_6),
         .myself(rowswap_write_cell_6),
         .write(write_commiter & (write_row_selector == 5'd6)),
@@ -156,7 +154,7 @@ module memcell_row (
     memcell cell_7(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_7),
         .myself(rowswap_write_cell_7),
         .write(write_commiter & (write_row_selector == 5'd7)),
@@ -169,7 +167,7 @@ module memcell_row (
     memcell cell_8(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_8),
         .myself(rowswap_write_cell_8),
         .write(write_commiter & (write_row_selector == 5'd8)),
@@ -182,7 +180,7 @@ module memcell_row (
     memcell cell_9(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_9),
         .myself(rowswap_write_cell_9),
         .write(write_commiter & (write_row_selector == 5'd9)),
@@ -195,7 +193,7 @@ module memcell_row (
     memcell cell_10(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b1),
         .prev_cell(rowswap_read_cell_10),
         .myself(rowswap_write_cell_10),
         .write(write_commiter & (write_row_selector == 5'd10)),
@@ -208,7 +206,7 @@ module memcell_row (
     memcell cell_11(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & 1'b0),
         .prev_cell(rowswap_read_cell_11),
         .myself(rowswap_write_cell_11),
         .write(write_commiter & (write_row_selector == 5'd11)),
@@ -216,4 +214,6 @@ module memcell_row (
         .my_color(cell_11_color),
         .cell_occ(hitscan[11])
     );
+
+
 endmodule

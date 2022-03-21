@@ -1,7 +1,7 @@
 import itertools
 
-MEMORY_SIZE_DIM1 = 13
-MEMORY_SIZE_DIM2 = 22
+MEMORY_SIZE_DIM1 = 12
+MEMORY_SIZE_DIM2 = 21
 MEMORY_DEPTH = 3
 
 memory_cell = f"""
@@ -23,7 +23,7 @@ module memcell (
     reg [{MEMORY_DEPTH-1}: 0] priv_mem;
     assign my_color = priv_mem;
     assign myself = priv_mem;
-    assign cell_occ = |priv_mem;
+    assign cell_occ = priv_mem != 3'b000;
 
     always @(posedge clk) begin
         if(!reset) begin
@@ -51,7 +51,7 @@ memcell_initializer = "\n".join(f"""
     memcell cell_{i}(
         .clk(clk),
         .reset(reset),
-        .advance(advance_row),
+        .advance(advance_row & {"1'b0" if i in [0, 11] else "1'b1"}),
         .prev_cell(rowswap_read_cell_{i}),
         .myself(rowswap_write_cell_{i}),
         .write(write_commiter & (write_row_selector == 5'd{i})),
@@ -90,11 +90,11 @@ module memcell_row (
 
     // color io
     output wire[{MEMORY_DEPTH-1}:0] gpu_color,
-    output wire[5:0] color_requestor
+    input wire[5:0] color_requestor
 );
 
     wire [{MEMORY_SIZE_DIM1-1}:0] hitscan;
-    assign row_full = |hitscan;
+    assign row_full = &(hitscan);
     assign hitbox_status = {{hitscan[hitbox_checker_0], hitscan[hitbox_checker_1], hitscan[hitbox_checker_2], hitscan[hitbox_checker_3]}};
     assign gpu_color = ({color_muxer});
 
@@ -120,14 +120,16 @@ def gen_rowio(cell_id):
     
     celldef = f"""
     wire [{MEMORY_DEPTH-1}:0] row_color_{cell_id};
+    wire rfull_{cell_id};
+    assign rowfull_stat[{cell_id}] = rfull_{cell_id} & {"1'b1" if cell_id != 20 else "1'b0"};
     memcell_row row_{cell_id}(
         .clk(clk),
         .reset(reset),
-        .advance_row(rowshift_cmd[{cell_id}]),
+        .advance_row((rowshift_cmd[{cell_id}] & {"1'b1" if cell_id != 20 else "1'b0"})),
         .color_setter(color_setter),
         .write_row_selector(color_set_requestor_x),
         .write_commiter(color_commit & (color_set_requestor_y == 6'd{cell_id})),
-        .row_full(rowfull_stat[{cell_id}]),
+        .row_full(rfull_{cell_id}),
         .hitbox_checker_0(hitbox_checker_0_x),
         .hitbox_checker_1(hitbox_checker_1_x),
         .hitbox_checker_2(hitbox_checker_2_x),
@@ -184,12 +186,10 @@ module memory (
     input wire [5:0] hitbox_checker_3_y,
     output wire[3:0] hitbox_status,
 
-    input wire [22:0] rowfull_stat,
+    output wire [22:0] rowfull_stat,
     input wire [22:0] rowshift_cmd,
     
 );
-    assign rowshift_cmd = 23'b0;
-
 
     wire [22:0] hitscan0;
     wire [22:0] hitscan1;

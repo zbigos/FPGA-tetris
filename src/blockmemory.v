@@ -110,8 +110,8 @@ module blkmemory # (
         end else begin
             if (resetperiod) begin  // what I'm indexing over y, has values 0-21
                 if (resetperiod_state < BLOCKS_HORIZONTAL) begin
-                    //mm_colosetter_y <= resetperiod_state[5:0];
-                    //mm_colosetter_x <= 5'd0;
+                    mm_colosetter_y <= resetperiod_state[5:0];
+                    mm_colosetter_x <= 5'd0;
                     resetperiod_state <= resetperiod_state + 1'b1;
                 end
                 if (resetperiod_state >= BLOCKS_HORIZONTAL & resetperiod_state < (BLOCKS_HORIZONTAL + BLOCKS_VERTICAL)) begin
@@ -120,8 +120,8 @@ module blkmemory # (
                     resetperiod_state <= resetperiod_state + 1'b1;
                 end
                 if (resetperiod_state >= (BLOCKS_HORIZONTAL + BLOCKS_VERTICAL) & resetperiod_state < (2*BLOCKS_HORIZONTAL + BLOCKS_VERTICAL)) begin
-                    //mm_colosetter_y <= resetperiod_state[5:0] - (BLOCKS_HORIZONTAL + BLOCKS_VERTICAL);
-                    //mm_colosetter_x <= 5'd11;
+                    mm_colosetter_y <= resetperiod_state[5:0] - (BLOCKS_HORIZONTAL + BLOCKS_VERTICAL);
+                    mm_colosetter_x <= 5'd11;
                     resetperiod_state <= resetperiod_state + 1'b1;
                 end
                 if (resetperiod_state >= (2*BLOCKS_HORIZONTAL + BLOCKS_VERTICAL)) begin
