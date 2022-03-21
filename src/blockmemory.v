@@ -40,6 +40,7 @@ module blkmemory # (
     | (P4blk_v == vaddr & P4blk_h == haddr);
 
     reg [2:0] proposed_memval;
+
     wire [2:0] memvalwire;
     assign memval = lookup_collision ? volatile_blk_color : proposed_memval;
     
@@ -54,9 +55,11 @@ module blkmemory # (
 
     wire [22:0] rowfull;
     wire [22:0] rowshift;
-    
+    wire [22:0] acc_rowshift;
+    reg cc;
+
     assign led1 = mm_colorsetter_commit;
-    assign debugled = rowshift[15:22];
+    assign acc_rowshift = cc ? rowshift : 23'b0;
 
     shifter sh(
         .debugled(),        
@@ -86,7 +89,7 @@ module blkmemory # (
         .hitbox_checker_3_y(P4blk_h),
         .hitbox_status(hitwire),
         .rowfull_stat(rowfull),
-        .rowshift_cmd(rowshift)
+        .rowshift_cmd(acc_rowshift)
     );
 
     reg resetperiod;
@@ -95,6 +98,7 @@ module blkmemory # (
 
     always @(posedge clk) begin
         if(!reset) begin
+            cc <= 1'b1;
             resetperiod <= 1'b1;
             resetperiod_state <= 21'b0;
             proposed_memval <= 3'b111;
@@ -108,6 +112,7 @@ module blkmemory # (
             stealstatus <= 4'b0;
             perq <= 4'b0;
         end else begin
+            cc <= 1'b1 - cc;
             if (resetperiod) begin  // what I'm indexing over y, has values 0-21
                 if (resetperiod_state < BLOCKS_HORIZONTAL) begin
                     mm_colosetter_y <= resetperiod_state[5:0];
