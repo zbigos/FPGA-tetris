@@ -3,7 +3,7 @@
 
 module top(
     input clk,
-    input btn,
+    input reset,
     input butt1,
     input butt2,
     input butt3,
@@ -17,19 +17,15 @@ module top(
 
     wire core_busy;
     wire clk_25_175;
+    assign clk_25_175 = clk;
+
     reg write;
     wire [4:0] gpu_block_selector_v;
     wire [4:0] gpu_block_selector_h;
     wire [2:0] gpu_blocktype;
 	
     reg [3:0] resetn_gen = 0;
-	reg reset;
-    wire pll_locked;
 
-	always @(posedge clk_25_175) begin
-		reset <= &resetn_gen;
-		resetn_gen <= {resetn_gen, pll_locked};
-	end
 
     wire [15:0] scorewire;
     wire [23:0] gamespeed;
@@ -51,12 +47,6 @@ module top(
         .top(gamespeed),
         .led(),
         .trigger(gametick)
-    );
-
-    vga_pll pll(
-        .clock_in(clk),
-        .pll_locked(pll_locked),
-        .clock_out(clk_25_175)
     );
 
     wire movement_commit, movement_steal, movement_decline, movement_request, movement_intent;
