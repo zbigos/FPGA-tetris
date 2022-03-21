@@ -46,10 +46,6 @@ module VGAcore
     wire h_drawing_pixels, v_drawing_pixels;
     assign drawing_pixels = h_drawing_pixels & v_drawing_pixels;
 
-    reg h_drawing_pixels;
-    reg v_drawing_pixels;
-    reg h_sync;
-    reg v_sync;
     /*
     assign h_drawing_pixels = hscan_pos < (NATIVE_HRES / RES_PRESCALER);
     assign v_drawing_pixels = vscan_pos < NATIVE_VRES;
@@ -60,6 +56,8 @@ module VGAcore
     assign r = proposed_r & {(4){drawing_pixels}};
     assign b = proposed_b & {(4){drawing_pixels}};
     assign g = proposed_g & {(4){drawing_pixels}};
+    assign h_sync = !((hscan_pos >= ((NATIVE_HRES + FRONT_PORCH_H) / RES_PRESCALER)) & (hscan_pos < ((NATIVE_HRES + FRONT_PORCH_H + SYNC_PULSE_H) / RES_PRESCALER)));
+    assign v_sync = !((vscan_pos >= (NATIVE_VRES + FRONT_PORCH_V)) & (vscan_pos < (NATIVE_VRES + FRONT_PORCH_V + SYNC_PULSE_V)));
 
     always @(posedge clk_25_175) begin
         if (!reset) begin
@@ -81,8 +79,6 @@ module VGAcore
             h_drawing_pixels <= hscan_pos < (NATIVE_HRES / RES_PRESCALER);
             v_drawing_pixels <= vscan_pos < NATIVE_VRES;
 
-            h_sync <= !((hscan_pos >= ((NATIVE_HRES + FRONT_PORCH_H) / RES_PRESCALER)) & (hscan_pos < ((NATIVE_HRES + FRONT_PORCH_H + SYNC_PULSE_H) / RES_PRESCALER)));
-            v_sync <= !((vscan_pos >= (NATIVE_VRES + FRONT_PORCH_V)) & (vscan_pos < (NATIVE_VRES + FRONT_PORCH_V + SYNC_PULSE_V)));
     
             if (hscan_pos == ((NATIVE_HRES + FRONT_PORCH_H + SYNC_PULSE_H + BACK_PORCH_H) / RES_PRESCALER)) begin
                 hscan_pos <= 0;

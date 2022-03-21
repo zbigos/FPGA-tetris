@@ -18,7 +18,7 @@ module gmanager # (
     output reg[11:0] pixstream,
     output wire[4:0] memselector_v,
     output wire[4:0] memselector_h,
-    input wire[2:0] blocktype_mem,
+    input wire[2:0] blocktype_mem
 );
 
     wire in_game_area_v, in_game_area_h, in_game_area;
@@ -61,9 +61,9 @@ module gmanager # (
 
     wire [11:0] texture_lookup;
 
-    color_lut c(
+    color_lut clut(
         .color(texture_lookup),
-        .type(blocktype_mem)
+        .blktype(blocktype_mem)
     );
 
     always @(posedge clk_25_175) begin

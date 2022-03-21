@@ -6,7 +6,7 @@ module scoredisplay(
     input wire [9:0] hreadwire,
     input wire [9:0] vreadwire,
     output wire [11:0] pixstream,
-    input wire [15:0] scorewire,
+    input wire [15:0] scorewire
 );
 
     // dostępne mam 380 pikseli na szerokość
@@ -139,12 +139,12 @@ module scoredisplay(
     score_digit s7(.clk_25_175(clk_25_175), .reset(reset), .mut_hreadwire(hreadwire - 567), .mut_vreadwire(vreadwire - 96), .pixstream(__pixstream7), .value(valused[6] ? values[6] : 4'b1111));
     assign pixstream7 = inside_cell7 ? __pixstream7 : pixstream6;
 
-    wire inside;
-    assign inside = (vreadwire >= 42 & vreadwire < 422) & (hreadwire >= 562 & hreadwire < 628); 
+    wire ech_inside;
+    assign ech_inside = (vreadwire >= 42 & vreadwire < 422) & (hreadwire >= 562 & hreadwire < 628); 
     wire [11:0] __pixstream8;
     wire inside_cell8;
     score_digit s8(.clk_25_175(clk_25_175), .reset(reset), .mut_hreadwire(hreadwire - 567), .mut_vreadwire(vreadwire - 50), .pixstream(__pixstream8), .value(valused[7] ? values[7] : 4'b1111));
     assign inside_cell8 = (vreadwire >= 53-3 & vreadwire < 94-3) & (hreadwire >= 567 & hreadwire < 623); 
-    assign pixstream = inside_cell8 ? __pixstream8 : (inside ? pixstream7 : 12'b111111111111);;
+    assign pixstream = inside_cell8 ? __pixstream8 : (ech_inside ? pixstream7 : 12'b111111111111);
 
 endmodule

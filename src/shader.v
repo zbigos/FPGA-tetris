@@ -2,7 +2,7 @@ module shader (
     input wire[5:0] block_x,
     input wire[5:0] block_y,
     input wire[11:0] in_color,
-    output wire[11:0] out_color,
+    output wire[11:0] out_color
 );
 
     //wire on_edge = ((block_x == 0) | (block_x == 23) | (block_y == 0) | (block_y == 32));

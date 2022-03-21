@@ -29,8 +29,7 @@ module memory (
     output wire[3:0] hitbox_status,
 
     output wire [22:0] rowfull_stat,
-    input wire [22:0] rowshift_cmd,
-    
+    input wire [22:0] rowshift_cmd
 );
 
     wire [22:0] hitscan0;
@@ -296,6 +295,7 @@ module memory (
     wire [2:0] row_color_0;
     wire rfull_0;
     assign rowfull_stat[0] = rfull_0 & 1'b1;
+
     memcell_row row_0(
         .clk(clk),
         .reset(reset),
@@ -334,7 +334,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_0_1_cell_8),
         .rowswap_write_cell_9(cellswap_layers_0_1_cell_9),
         .rowswap_write_cell_10(cellswap_layers_0_1_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_0_1_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_0_1_cell_11)
     );
     
 
@@ -379,7 +379,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_1_2_cell_8),
         .rowswap_write_cell_9(cellswap_layers_1_2_cell_9),
         .rowswap_write_cell_10(cellswap_layers_1_2_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_1_2_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_1_2_cell_11)
     );
     
 
@@ -424,7 +424,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_2_3_cell_8),
         .rowswap_write_cell_9(cellswap_layers_2_3_cell_9),
         .rowswap_write_cell_10(cellswap_layers_2_3_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_2_3_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_2_3_cell_11)
     );
     
 
@@ -469,7 +469,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_3_4_cell_8),
         .rowswap_write_cell_9(cellswap_layers_3_4_cell_9),
         .rowswap_write_cell_10(cellswap_layers_3_4_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_3_4_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_3_4_cell_11)
     );
     
 
@@ -514,7 +514,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_4_5_cell_8),
         .rowswap_write_cell_9(cellswap_layers_4_5_cell_9),
         .rowswap_write_cell_10(cellswap_layers_4_5_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_4_5_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_4_5_cell_11)
     );
     
 
@@ -559,7 +559,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_5_6_cell_8),
         .rowswap_write_cell_9(cellswap_layers_5_6_cell_9),
         .rowswap_write_cell_10(cellswap_layers_5_6_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_5_6_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_5_6_cell_11)
     );
     
 
@@ -604,7 +604,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_6_7_cell_8),
         .rowswap_write_cell_9(cellswap_layers_6_7_cell_9),
         .rowswap_write_cell_10(cellswap_layers_6_7_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_6_7_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_6_7_cell_11)
     );
     
 
@@ -649,7 +649,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_7_8_cell_8),
         .rowswap_write_cell_9(cellswap_layers_7_8_cell_9),
         .rowswap_write_cell_10(cellswap_layers_7_8_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_7_8_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_7_8_cell_11)
     );
     
 
@@ -694,7 +694,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_8_9_cell_8),
         .rowswap_write_cell_9(cellswap_layers_8_9_cell_9),
         .rowswap_write_cell_10(cellswap_layers_8_9_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_8_9_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_8_9_cell_11)
     );
     
 
@@ -739,7 +739,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_9_10_cell_8),
         .rowswap_write_cell_9(cellswap_layers_9_10_cell_9),
         .rowswap_write_cell_10(cellswap_layers_9_10_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_9_10_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_9_10_cell_11)
     );
     
 
@@ -784,7 +784,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_10_11_cell_8),
         .rowswap_write_cell_9(cellswap_layers_10_11_cell_9),
         .rowswap_write_cell_10(cellswap_layers_10_11_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_10_11_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_10_11_cell_11)
     );
     
 
@@ -829,7 +829,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_11_12_cell_8),
         .rowswap_write_cell_9(cellswap_layers_11_12_cell_9),
         .rowswap_write_cell_10(cellswap_layers_11_12_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_11_12_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_11_12_cell_11)
     );
     
 
@@ -874,7 +874,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_12_13_cell_8),
         .rowswap_write_cell_9(cellswap_layers_12_13_cell_9),
         .rowswap_write_cell_10(cellswap_layers_12_13_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_12_13_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_12_13_cell_11)
     );
     
 
@@ -919,7 +919,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_13_14_cell_8),
         .rowswap_write_cell_9(cellswap_layers_13_14_cell_9),
         .rowswap_write_cell_10(cellswap_layers_13_14_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_13_14_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_13_14_cell_11)
     );
     
 
@@ -964,7 +964,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_14_15_cell_8),
         .rowswap_write_cell_9(cellswap_layers_14_15_cell_9),
         .rowswap_write_cell_10(cellswap_layers_14_15_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_14_15_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_14_15_cell_11)
     );
     
 
@@ -1009,7 +1009,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_15_16_cell_8),
         .rowswap_write_cell_9(cellswap_layers_15_16_cell_9),
         .rowswap_write_cell_10(cellswap_layers_15_16_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_15_16_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_15_16_cell_11)
     );
     
 
@@ -1054,7 +1054,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_16_17_cell_8),
         .rowswap_write_cell_9(cellswap_layers_16_17_cell_9),
         .rowswap_write_cell_10(cellswap_layers_16_17_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_16_17_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_16_17_cell_11)
     );
     
 
@@ -1099,7 +1099,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_17_18_cell_8),
         .rowswap_write_cell_9(cellswap_layers_17_18_cell_9),
         .rowswap_write_cell_10(cellswap_layers_17_18_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_17_18_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_17_18_cell_11)
     );
     
 
@@ -1144,7 +1144,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_18_19_cell_8),
         .rowswap_write_cell_9(cellswap_layers_18_19_cell_9),
         .rowswap_write_cell_10(cellswap_layers_18_19_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_18_19_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_18_19_cell_11)
     );
     
 
@@ -1189,7 +1189,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_19_20_cell_8),
         .rowswap_write_cell_9(cellswap_layers_19_20_cell_9),
         .rowswap_write_cell_10(cellswap_layers_19_20_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_19_20_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_19_20_cell_11)
     );
     
 
@@ -1234,7 +1234,7 @@ module memory (
         .rowswap_write_cell_8(cellswap_layers_20_21_cell_8),
         .rowswap_write_cell_9(cellswap_layers_20_21_cell_9),
         .rowswap_write_cell_10(cellswap_layers_20_21_cell_10),
-        .rowswap_write_cell_11(cellswap_layers_20_21_cell_11),
+        .rowswap_write_cell_11(cellswap_layers_20_21_cell_11)
     );
     
     assign color_getter = (((color_requestor_y == 6'd0) ? row_color_0 : 3'b0) | ((color_requestor_y == 6'd1) ? row_color_1 : 3'b0) | ((color_requestor_y == 6'd2) ? row_color_2 : 3'b0) | ((color_requestor_y == 6'd3) ? row_color_3 : 3'b0) | ((color_requestor_y == 6'd4) ? row_color_4 : 3'b0) | ((color_requestor_y == 6'd5) ? row_color_5 : 3'b0) | ((color_requestor_y == 6'd6) ? row_color_6 : 3'b0) | ((color_requestor_y == 6'd7) ? row_color_7 : 3'b0) | ((color_requestor_y == 6'd8) ? row_color_8 : 3'b0) | ((color_requestor_y == 6'd9) ? row_color_9 : 3'b0) | ((color_requestor_y == 6'd10) ? row_color_10 : 3'b0) | ((color_requestor_y == 6'd11) ? row_color_11 : 3'b0) | ((color_requestor_y == 6'd12) ? row_color_12 : 3'b0) | ((color_requestor_y == 6'd13) ? row_color_13 : 3'b0) | ((color_requestor_y == 6'd14) ? row_color_14 : 3'b0) | ((color_requestor_y == 6'd15) ? row_color_15 : 3'b0) | ((color_requestor_y == 6'd16) ? row_color_16 : 3'b0) | ((color_requestor_y == 6'd17) ? row_color_17 : 3'b0) | ((color_requestor_y == 6'd18) ? row_color_18 : 3'b0) | ((color_requestor_y == 6'd19) ? row_color_19 : 3'b0) | ((color_requestor_y == 6'd20) ? row_color_20 : 3'b0));

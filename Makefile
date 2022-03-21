@@ -15,11 +15,12 @@ export COCOTB_REDUCED_LOG_FMT=1
 
 all : test_vga_core
 
-#test_vga_core:
-#	rm -rf sim_build/
-#	mkdir sim_build/
-#	iverilog -o sim_build/sim.vvp -s VGAcore -s dump -g2012 src/vga_core.v test/dump_vga_core.v
-#	PYTHONOPTIMIZE=${NOASSERT} MODULE=test.test_vga_core vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus sim_build/sim.vvp
+test_top:
+	rm -rf sim_build/
+	mkdir sim_build/
+	iverilog -o sim_build/sim.vvp -s top -s dump -g2012 $(SOURCES)
+	PYTHONOPTIMIZE=${NOASSERT} MODULE=test.test_top vvp -M $$(cocotb-config --prefix)/cocotb/libs -m libcocotbvpi_icarus sim_build/sim.vvp
+	! grep failure results.xml
 
 show_%: %.vcd %.gtkw
 	gtkwave $^

@@ -12,8 +12,7 @@ module tetron_Sb_shaper(
     output wire [4:0] blk3_voffset,
     output wire [4:0] blk3_hoffset,
     output wire [4:0] blk4_voffset,
-    output wire [4:0] blk4_hoffset,
-
+    output wire [4:0] blk4_hoffset
 );
 
     always @(posedge clk) begin

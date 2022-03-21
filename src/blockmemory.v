@@ -1,13 +1,16 @@
 `default_nettype none
 `timescale 1ns/1ns
 
-module blkmemory # (
+module blkmemory# (
+    parameter NATIVE_HRES = 640,
+    parameter NATIVE_VRES = 480,
+    parameter RES_PRESCALER = 1,
     parameter BLOCKS_VERTICAL = 12, //20
-    parameter BLOCKS_HORIZONTAL = 21, //10    
+    parameter BLOCKS_HORIZONTAL = 21, //10
+    parameter VBLK_SIZE = 32,
+    parameter HBLK_SIZE = 24
+    
 ) (
-    output wire led1,
-    output wire led2,
-    output wire[7:0] debugled,
     input wire clk,
     input wire reset,
     input wire core_busy,
@@ -15,7 +18,6 @@ module blkmemory # (
     input wire[4:0] haddr,
     output wire [2:0] memval,
     output reg collision,
-
     output reg movement_commit,
     output reg movement_steal,
     output reg movement_declined,
@@ -35,10 +37,7 @@ module blkmemory # (
 );
 
     wire lookup_collision;
-    assign lookup_collision = (P1blk_v == vaddr & P1blk_h == haddr) \
-    | (P2blk_v == vaddr & P2blk_h == haddr) \
-    | (P3blk_v == vaddr & P3blk_h == haddr) \
-    | (P4blk_v == vaddr & P4blk_h == haddr);
+    assign lookup_collision = (P1blk_v == vaddr & P1blk_h == haddr) | (P2blk_v == vaddr & P2blk_h == haddr) | (P3blk_v == vaddr & P3blk_h == haddr) | (P4blk_v == vaddr & P4blk_h == haddr);
 
     reg [2:0] proposed_memval;
 
@@ -57,17 +56,14 @@ module blkmemory # (
     wire [22:0] rowshift;
     wire [22:0] acc_rowshift;
     reg [3:0] cooldown;
-    assign debugled = cooldown;
 
     reg [16:0] streak_cooldown;
     reg [2:0] streak_iterator;
 
-    assign led1 = mm_colorsetter_commit;
     assign acc_rowshift = (cooldown == 4'b0) ? rowshift : 23'b0;
     assign bumpwire = (cooldown == 4'b0) & rowshift[1];
 
     shifter sh(
-        .debugled(),        
         .clk(clk),
         .rowfull(rowfull),
         .rowshift(rowshift)

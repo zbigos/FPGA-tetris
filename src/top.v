@@ -4,10 +4,6 @@
 module top(
     input clk,
     input btn,
-    output led1,
-    output led2,
-    output led3,
-    output wire[7:0] DEBUGLED,
     input butt1,
     input butt2,
     input butt3,
@@ -16,7 +12,7 @@ module top(
     output vga_v_sync,
     output reg[3:0] vga_r,
     output reg[3:0] vga_g,
-    output reg[3:0] vga_b,
+    output reg[3:0] vga_b
 );
 
     wire core_busy;
@@ -60,16 +56,11 @@ module top(
     vga_pll pll(
         .clock_in(clk),
         .pll_locked(pll_locked),
-        .clock_out(clk_25_175),
+        .clock_out(clk_25_175)
     );
 
     wire movement_commit, movement_steal, movement_decline, movement_request, movement_intent;
-    assign led3 = movement_request;
-
     blkmemory memory(
-        .debugled(DEBUGLED),
-        .led1(led1),
-        .led2(led2),
         .clk(clk_25_175),
         .reset(reset),
         .core_busy(core_busy),
@@ -91,11 +82,10 @@ module top(
         .P4blk_h(P4blk_h),
         .volatile_blk_color(volatile_blk_color),
         .bumpwire(bumpwire),
-        .scorewire(scorewire),
+        .scorewire(scorewire)
     );
 
     cellstorage vcell(
-        .led(),
         .clk(clk_25_175),
         .reset(reset),
         .movement_commit(movement_commit),
@@ -116,7 +106,7 @@ module top(
         .P4blk_v(P4blk_v),
         .P4blk_h(P4blk_h),
         .volatile_blk_color(volatile_blk_color),
-        .gametick(gametick),
+        .gametick(gametick)
     );
 
     wire [9:0] h_readwire, v_readwire;
@@ -154,7 +144,7 @@ module top(
         .hreadwire(h_readwire),
         .vreadwire(v_readwire),
         .pixstream(score_screen),
-        .scorewire(scorewire),
+        .scorewire(scorewire)
     );
 
     gmanager game_manager(
@@ -165,7 +155,7 @@ module top(
         .pixstream(board_stream),
         .memselector_v(gpu_block_selector_v),
         .memselector_h(gpu_block_selector_h),
-        .blocktype_mem(gpu_blocktype),
+        .blocktype_mem(gpu_blocktype)
     );
 
     VGAcore core(

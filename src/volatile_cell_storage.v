@@ -26,7 +26,7 @@ module cellstorage(
     output reg[4:0] P4blk_v,
     output reg[4:0] P4blk_h,
 
-    output reg[2:0] volatile_blk_color,
+    output reg[2:0] volatile_blk_color
 );
 
     reg [4:0] tetron_v;
@@ -153,9 +153,9 @@ module cellstorage(
         if (!reset) begin
             process_decline <= 1'b0;
             cooldown <= 1'b0;
-            tetron_type <= 3'd6;
+            tetron_type <= 3'd0;
             tetron_v <= 4'd5;
-            tetron_h <= 4'd5;
+            tetron_h <= 4'd1;
             keep_tetron_v <= 4'd5;
             keep_tetron_h <= 4'd5;
             movement_request <= 1'b0;
@@ -208,13 +208,13 @@ module cellstorage(
                         movement_available <= 1'b0;
                         movement_request <= 1'b1;
                         dropcool <= 6'd16;
-                    end else if (&!dropit & buttdebounceR & (dropcool == 0) & movement_available) begin
+                    end else if (!dropit & buttdebounceR & (dropcool == 0) & movement_available) begin
                         movement_intent <= 1'b1;
                         tetron_v <= tetron_v - 1'b1;
                         movement_available <= 1'b0;
                         movement_request <= 1'b1;
                         dropcool <= 6'd16;
-                    end else if (&!dropit & buttdebounceT & (dropcool == 0) & movement_available) begin
+                    end else if (!dropit & buttdebounceT & (dropcool == 0) & movement_available) begin
                         movement_intent <= 1'b1;
                         tetron_rotation <= (tetron_rotation == 3'd3) ? 3'b0 : tetron_rotation + 1'b1;
                         movement_available <= 1'b0;
@@ -256,10 +256,10 @@ module cellstorage(
                 end
 
                 if (!movement_steal & process_steal) begin
-                    tetron_h <= 4'd0;
+                    tetron_h <= 4'd1;
                     tetron_v <= 4'd5;
                     volatile_blk_color <= (state[2:0] == 3'b0) ? 3'b101 : state[2:0];
-                    tetron_type <= 3'd6; //(state % 16) % 5;
+                    tetron_type <= (state % 16) % 7;
                     movement_available <= 1'b1;
                     process_steal <= 1'b0;
                     keep_tetron_rotation <= 3'b0;

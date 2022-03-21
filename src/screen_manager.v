@@ -5,7 +5,7 @@ module screen_manager(
     input wire[9:0] v_readwire,
     output wire board_stream_priori,
     output wire top_view_priori,
-    output wire scorecounter_priority,
+    output wire scorecounter_priority
 );
 
     assign board_stream_priori = (v_readwire >= 40 & v_readwire < 424) & (h_readwire >= 41 & h_readwire < 547);

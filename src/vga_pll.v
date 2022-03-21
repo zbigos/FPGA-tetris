@@ -11,10 +11,10 @@
  */
 
 module vga_pll(
-	input  clock_in,
-	output clock_out,
-	output pll_locked,
-	);
+	input wire clock_in,
+	output wire clock_out,
+	output wire pll_locked
+);
 
 	SB_PLL40_PAD #(
 		.DIVR(4'b1001),		// DIVR =  9

@@ -2,8 +2,7 @@
 module shifter (
     input wire clk,
     input wire [22:0] rowfull,
-    output reg [22:0] rowshift,
-    output wire[7:0] debugled,
+    output reg [22:0] rowshift
 );
 
     wire [5:0] point1;

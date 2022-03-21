@@ -10,9 +10,10 @@ module topbar_display(
     output reg[23:0] gamespeed
 );
 
-    wire inside;
-    assign inside = (vreadwire >= 42 & vreadwire < 422) & (hreadwire >= 7 & hreadwire < 33); 
-    assign pixstream = inside ? ipixstream : 12'b111111111111;
+
+    wire ech_inside;
+    assign ech_inside = (vreadwire >= 42 & vreadwire < 422) & (hreadwire >= 7 & hreadwire < 33); 
+    assign pixstream = ech_inside ? ipixstream : 12'b111111111111;
     wire [11:0] ipixstream;
     assign ipixstream = ((10'd422 - vreadwire) < fillstate) ? 12'b000000001111 : (((10'd392 - vreadwire) < fillstate) ? {4'b0000, 4'b0000, (fillstate - (10'd392 - vreadwire)) >> 1} : 12'b000000000000);
     wire [9:0] fillstate = 10'd38 * state;

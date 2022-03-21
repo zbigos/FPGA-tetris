@@ -4,7 +4,7 @@
 
 module blknum_horizontal (
     input wire[9:0] pposition, 
-    output wire[4:0] blkid,
+    output wire[4:0] blkid
 );
 
     wire locators [0: 24];
