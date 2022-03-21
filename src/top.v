@@ -11,6 +11,7 @@ module top(
     input butt1,
     input butt2,
     input butt3,
+    input butt4,
     output vga_h_sync,
     output vga_v_sync,
     output reg[3:0] vga_r,
@@ -20,8 +21,6 @@ module top(
 
     wire core_busy;
     wire clk_25_175;
-    wire [9:0] h_readwire, v_readwire;
-    reg [11:0] pixstream;
     reg write;
     wire [4:0] gpu_block_selector_v;
     wire [4:0] gpu_block_selector_h;
@@ -36,6 +35,8 @@ module top(
 		resetn_gen <= {resetn_gen, pll_locked};
 	end
 
+    wire [15:0] scorewire;
+    wire [23:0] gamespeed;
     wire[4:0] P1blk_v;
     wire[4:0] P1blk_h;
     wire[4:0] P2blk_v;
@@ -45,12 +46,13 @@ module top(
     wire[4:0] P4blk_v;
     wire[4:0] P4blk_h;
     wire[2:0] volatile_blk_color;
+    wire bumpwire;
 
     wire gametick;
     timer t(
         .clk(clk_25_175),
         .reset(reset),
-        .top(24'b111111111111111111111111),
+        .top(gamespeed),
         .led(),
         .trigger(gametick)
     );
@@ -88,6 +90,8 @@ module top(
         .P4blk_v(P4blk_v),
         .P4blk_h(P4blk_h),
         .volatile_blk_color(volatile_blk_color),
+        .bumpwire(bumpwire),
+        .scorewire(scorewire),
     );
 
     cellstorage vcell(
@@ -102,6 +106,7 @@ module top(
         .buttL(butt1),
         .buttT(butt2),
         .buttR(butt3),
+        .buttD(butt4),
         .P1blk_v(P1blk_v),
         .P1blk_h(P1blk_h),
         .P2blk_v(P2blk_v),
@@ -114,12 +119,50 @@ module top(
         .gametick(gametick),
     );
 
+    wire [9:0] h_readwire, v_readwire;
+    wire [11:0] pixstream;
+    wire [11:0] board_stream;
+    wire [11:0] gamespeed_stream;
+    wire [11:0] score_screen;
+
+    wire board_stream_priority;
+    wire speedmeter_priority;
+    wire scorecounter_priority;
+    assign pixstream = board_stream_priority ? board_stream : (speedmeter_priority ? gamespeed_stream : (scorecounter_priority ? score_screen : 12'b001100110011));
+
+    screen_manager screen_mngr(
+        .h_readwire(h_readwire),
+        .v_readwire(v_readwire),
+        .board_stream_priori(board_stream_priority),
+        .top_view_priori(speedmeter_priority),
+        .scorecounter_priority(scorecounter_priority)
+    );
+
+    topbar_display tdisplay(
+        .clk_25_175(clk_25_175),
+        .reset(reset),
+        .hreadwire(h_readwire),
+        .vreadwire(v_readwire),
+        .pixstream(gamespeed_stream),
+        .bump(bumpwire),
+        .gamespeed(gamespeed)
+    );
+
+    scoredisplay sdisplay(
+        .clk_25_175(clk_25_175),
+        .reset(reset),
+        .hreadwire(h_readwire),
+        .vreadwire(v_readwire),
+        .pixstream(score_screen),
+        .scorewire(scorewire),
+    );
+
     gmanager game_manager(
         .clk_25_175(clk_25_175),
         .reset(reset),
         .hreadwire(h_readwire),
         .vreadwire(v_readwire),
-        .pixstream(pixstream),
+        .pixstream(board_stream),
         .memselector_v(gpu_block_selector_v),
         .memselector_h(gpu_block_selector_h),
         .blocktype_mem(gpu_blocktype),

@@ -21,7 +21,7 @@ module blkmemory # (
     output reg movement_declined,
     input wire movement_request,
     input wire movement_intent,
-
+    output wire bumpwire,
     input wire[4:0] P1blk_v,
     input wire[4:0] P1blk_h,
     input wire[4:0] P2blk_v,
@@ -31,6 +31,7 @@ module blkmemory # (
     input wire[4:0] P4blk_v,
     input wire[4:0] P4blk_h,
     input wire[2:0] volatile_blk_color,
+    output reg [15:0] scorewire
 );
 
     wire lookup_collision;
@@ -52,14 +53,18 @@ module blkmemory # (
     reg [3:0] stealstatus;
 
     wire [3:0] hitwire;
-
     wire [22:0] rowfull;
     wire [22:0] rowshift;
     wire [22:0] acc_rowshift;
-    reg cc;
+    reg [3:0] cooldown;
+    assign debugled = cooldown;
+
+    reg [16:0] streak_cooldown;
+    reg [2:0] streak_iterator;
 
     assign led1 = mm_colorsetter_commit;
-    assign acc_rowshift = cc ? rowshift : 23'b0;
+    assign acc_rowshift = (cooldown == 4'b0) ? rowshift : 23'b0;
+    assign bumpwire = (cooldown == 4'b0) & rowshift[1];
 
     shifter sh(
         .debugled(),        
@@ -95,10 +100,10 @@ module blkmemory # (
     reg resetperiod;
     reg [20:0] resetperiod_state;
     reg [3:0] perq;
+    reg [4:0] keep_concurrent_blks;
 
     always @(posedge clk) begin
         if(!reset) begin
-            cc <= 1'b1;
             resetperiod <= 1'b1;
             resetperiod_state <= 21'b0;
             proposed_memval <= 3'b111;
@@ -111,8 +116,11 @@ module blkmemory # (
             movement_commit <= 1'b0;
             stealstatus <= 4'b0;
             perq <= 4'b0;
+            cooldown <= 4'b0;
+            keep_concurrent_blks <= 5'b0;
+            streak_iterator <= 3'b0;
+            streak_cooldown <= 16'b0;
         end else begin
-            cc <= 1'b1 - cc;
             if (resetperiod) begin  // what I'm indexing over y, has values 0-21
                 if (resetperiod_state < BLOCKS_HORIZONTAL) begin
                     mm_colosetter_y <= resetperiod_state[5:0];
@@ -135,15 +143,48 @@ module blkmemory # (
                 end
             end else begin
                 proposed_memval <= memvalwire;
-                if (movement_request & (perq == 4'b0)) begin
+                if (acc_rowshift[0] & cooldown == 4'b0) begin
+                    cooldown <= 4'b1111;
+                    if (streak_cooldown == 0) begin
+                        scorewire <= 16'd40;
+                        streak_cooldown <= 16'd1024;
+                    end else begin
+                        streak_cooldown <= 16'd1024;
+
+                        if (streak_iterator == 3'd0) begin
+                            scorewire <= 16'd60;
+                            streak_iterator <= 3'd1;
+                        end
+
+                        if (streak_iterator == 3'd1) begin
+                            scorewire <= 16'd200; // sum for 2 is 100, but we get 40 in streak_iterator = 0
+                            streak_iterator <= 3'd2;
+                        end
+
+                        if (streak_iterator == 3'd2) begin
+                            scorewire <= 16'd900;
+                            streak_iterator <= 3'd3;
+                        end
+
+                    end
+                end else if (movement_request & (perq == 4'b0)) begin
                     perq <= 4'd12;
+                    cooldown <= 4'b1111;
                 end else if (perq == 0) begin
+                    scorewire <= 16'b0;
                     movement_steal <= 1'b0;
                     movement_commit <= 1'b0;
                     movement_declined <= 1'b0;
                     stealstatus <= 4'd0;
+                    if (cooldown > 0) begin
+                        cooldown <= cooldown - 1'b1;
+                    end
+                    if (streak_cooldown > 0) begin
+                        streak_cooldown <= streak_cooldown - 1'b1;
+                    end else begin
+                        streak_iterator <= 3'b0;
+                    end
                 end
-
                 if (perq > 0) begin
                     if (perq == 4'd1) begin
                         perq <= 1'b0;
@@ -151,6 +192,7 @@ module blkmemory # (
                             if (movement_intent) begin
                                 movement_declined <= 1'b1; // intent = 1 means user made the move
                             end else begin
+
                                 if (stealstatus == 4'd0) begin
                                     mm_colorsetter_commit <= 1'b1;
                                     mm_colosetter_x <= P1blk_v;
@@ -190,6 +232,7 @@ module blkmemory # (
 
                                 if (stealstatus == 4'd5) begin
                                     movement_steal <= 1'b1;
+                                    stealstatus <= 4'd6;
                                 end
                             end
                         end else begin
@@ -198,6 +241,7 @@ module blkmemory # (
                     end else begin
                         perq <= perq - 1'b1;
                     end 
+                end else begin
                 end
             end
         end

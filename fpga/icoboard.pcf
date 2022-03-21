@@ -6,9 +6,14 @@ set_io --warn-no-port led1 C8
 set_io --warn-no-port led2 F7
 set_io --warn-no-port led3 K9
 
-set_io --warn-no-port butt1 B3
-set_io --warn-no-port butt2 B4
-set_io --warn-no-port butt3 B5
+
+set_io --warn-no-port butt1 B6
+set_io --warn-no-port butt3 B3 
+set_io --warn-no-port butt2 C3
+
+set_io --warn-no-port butt4 A2
+
+
 
 set_io -nowarn DEBUGLED[0]  D8
 set_io -nowarn DEBUGLED[1]  B9

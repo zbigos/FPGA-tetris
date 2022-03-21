@@ -77,7 +77,7 @@ module gmanager # (
             end
 
             if (!in_game_area) begin
-               pixstream <= 12'b000000001111;
+               pixstream <= 12'b111111111111;
             end
         end
     end

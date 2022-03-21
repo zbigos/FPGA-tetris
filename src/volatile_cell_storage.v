@@ -9,7 +9,8 @@ module cellstorage(
     input wire buttL,
     input wire buttT,
     input wire buttR,
-    
+    input wire buttD,
+
     output reg movement_request,
     output reg movement_intent,
     input wire movement_declined,
@@ -38,19 +39,14 @@ module cellstorage(
 
     reg [3:0] tetron_type;
 
-
     wire [4:0] itetron_blk_h [4:0];
     wire [4:0] itetron_blk_v [4:0];
-
     wire [4:0] otetron_blk_h [4:0];
     wire [4:0] otetron_blk_v [4:0];
-
     wire [4:0] latetron_blk_h [4:0];
     wire [4:0] latetron_blk_v [4:0];
-
     wire [4:0] lbtetron_blk_h [4:0];
     wire [4:0] lbtetron_blk_v [4:0];
-
     wire [4:0] ttetron_blk_h [4:0];
     wire [4:0] ttetron_blk_v [4:0];
 
@@ -59,7 +55,6 @@ module cellstorage(
     assign P2blk_v = tetron_v + itetron_blk_v[1] + otetron_blk_v[1] + latetron_blk_v[1] + lbtetron_blk_v[1] + ttetron_blk_v[1];
     assign P3blk_v = tetron_v + itetron_blk_v[2] + otetron_blk_v[2] + latetron_blk_v[2] + lbtetron_blk_v[2] + ttetron_blk_v[2];
     assign P4blk_v = tetron_v + itetron_blk_v[3] + otetron_blk_v[3] + latetron_blk_v[3] + lbtetron_blk_v[3] + ttetron_blk_v[3];
-    
     assign P1blk_h = tetron_h + itetron_blk_h[0] + otetron_blk_h[0] + latetron_blk_h[0] + lbtetron_blk_h[0] + ttetron_blk_h[0];
     assign P2blk_h = tetron_h + itetron_blk_h[1] + otetron_blk_h[1] + latetron_blk_h[1] + lbtetron_blk_h[1] + ttetron_blk_h[1];
     assign P3blk_h = tetron_h + itetron_blk_h[2] + otetron_blk_h[2] + latetron_blk_h[2] + lbtetron_blk_h[2] + ttetron_blk_h[2];
@@ -117,21 +112,23 @@ module cellstorage(
     );
 
     reg movement_available;
-    reg cooldown;
+    reg [5:0] cooldown;
     reg postdecline_cool;
     reg process_steal;
     reg [7:0] state;
-    reg [5:0] buttdebounceL;
-    reg [5:0] buttdebounceR;
-    reg [5:0] buttdebounceT;
+    reg [25:0] buttdebounceL;
+    reg [25:0] buttdebounceR;
+    reg [25:0] buttdebounceT;
+    reg [25:0] buttdebounceD;
     reg process_decline;
-
+    reg dropit;
     assign led = 1'b0;
+    reg [5:0] dropcool;
     always @(posedge clk) begin
         if (!reset) begin
             process_decline <= 1'b0;
             cooldown <= 1'b0;
-            tetron_type <= 3'd4;
+            tetron_type <= 3'd0;
             tetron_v <= 4'd5;
             tetron_h <= 4'd5;
             keep_tetron_v <= 4'd5;
@@ -146,45 +143,62 @@ module cellstorage(
             buttdebounceL <= 6'b0;
             process_decline <= 1'b0;
             buttdebounceT <= 6'b0;
+            buttdebounceD <= 6'b0;
             buttdebounceR <= 6'b0;
             postdecline_cool <= 1'b0;
             keep_tetron_rotation <= 3'b0;
+            dropit <= 1'b0;
+            dropcool <= 6'd16;
         end else begin
-            buttdebounceL <= {buttL, buttdebounceL[5:1]};
-            buttdebounceT <= {buttT, buttdebounceT[5:1]};
-            buttdebounceR <= {buttR, buttdebounceR[5:1]};
-            
+            buttdebounceL <= {!buttL, buttdebounceL[25:1]};
+            buttdebounceT <= {!buttT, buttdebounceT[25:1]};
+            buttdebounceR <= {!buttR, buttdebounceR[25:1]};
+            buttdebounceD <= {!buttD, buttdebounceD[25:1]};
+
             state <= {state[6:0], state[7] ^ state[5] ^ state[4] ^ state[3]};
-            if (movement_available) begin
+            if (movement_available & !movement_request) begin
                 if (gametick) begin
                     movement_intent <= 1'b0; // intent 0 = natural movement
                     tetron_h <= tetron_h + 1'b1;
                     movement_available <= 1'b0;
                     movement_request <= 1'b1;
                 end else begin
-                    if (&buttdebounceL & !cooldown & movement_available) begin
+                    if (dropit) begin
+                        if (dropcool == 6'b0) begin
+                            movement_intent <= 1'b0;
+                            tetron_h <= tetron_h + 1'b1;
+                            movement_available <= 1'b0;
+                            movement_request <= 1'b1;
+                            cooldown <= 1'b1;
+                            dropcool <= 6'd16;
+                        end else begin
+                            dropcool <= dropcool - 1'b1;
+                        end
+                    end else if (!dropit & &buttdebounceD & (dropcool == 0) & movement_available) begin
+                        dropit <= 1'b1;
+                        dropcool <= 6'd16;
+                    end else if (!dropit & &buttdebounceL & (dropcool == 0) & movement_available) begin
                         movement_intent <= 1'b1;
                         tetron_v <= tetron_v + 1'b1;
                         movement_available <= 1'b0;
                         movement_request <= 1'b1;
-                        cooldown <= 1'b1;
-                    end else if (&buttdebounceR & !cooldown & movement_available) begin
+                        dropcool <= 6'd16;
+                    end else if (&!dropit & buttdebounceR & (dropcool == 0) & movement_available) begin
                         movement_intent <= 1'b1;
                         tetron_v <= tetron_v - 1'b1;
                         movement_available <= 1'b0;
                         movement_request <= 1'b1;
-                        cooldown <= 1'b1;
-                    end else if (&buttdebounceT & !cooldown & movement_available) begin
+                        dropcool <= 6'd16;
+                    end else if (&!dropit & buttdebounceT & (dropcool == 0) & movement_available) begin
                         movement_intent <= 1'b1;
                         tetron_rotation <= (tetron_rotation == 3'd3) ? 3'b0 : tetron_rotation + 1'b1;
                         movement_available <= 1'b0;
                         movement_request <= 1'b1;
-                        cooldown <= 1'b1;
-                    end
-
-                    if (!(&buttdebounceL) & !(&buttdebounceR) & !(buttdebounceT)) begin
-                        cooldown <= 1'b0;
-                    end
+                        dropcool <= 6'd16;
+                    end else if (dropcool > 0) begin
+                        if (!(|buttdebounceD) & !(|buttdebounceL) & !(|buttdebounceR) & !(|buttdebounceT))
+                            dropcool <= dropcool - 1'b1;
+                    end 
                 end
             end else begin
                 if (movement_commit) begin
@@ -198,6 +212,7 @@ module cellstorage(
                 if (movement_declined && !process_decline) begin
                     process_decline <= 1'b1;
                     movement_request <= 1'b0;
+                    dropit <= 1'b0;
                 end
 
                 if (!movement_declined & process_decline) begin
@@ -206,22 +221,25 @@ module cellstorage(
                     tetron_h <= keep_tetron_h;
                     tetron_v <= keep_tetron_v;
                     tetron_rotation <= keep_tetron_rotation;
+                    dropit <= 1'b0;
                 end
 
                 if (movement_steal & !process_steal) begin
                     movement_request <= 1'b0;
                     process_steal <= 1'b1;
+                    dropit <= 1'b0;
                 end
 
                 if (!movement_steal & process_steal) begin
-                    tetron_h <= 4'd5;
+                    tetron_h <= 4'd0;
                     tetron_v <= 4'd5;
                     volatile_blk_color <= (state[2:0] == 3'b0) ? 3'b101 : state[2:0];
-                    tetron_type <= state % 2;
+                    tetron_type <= 3'd0; //(state % 16) % 5;
                     movement_available <= 1'b1;
                     process_steal <= 1'b0;
                     keep_tetron_rotation <= 3'b0;
                     tetron_rotation <= 2'b00;
+                    dropit <= 1'b0;
                 end
             end
         end
