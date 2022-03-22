@@ -5,14 +5,14 @@ module tetron_T_shaper(
     input wire clk,
     input wire active,
     input wire [2:0] tetron_rotation,
-    output wire [4:0] blk1_voffset,
-    output wire [4:0] blk1_hoffset,
-    output wire [4:0] blk2_voffset,
-    output wire [4:0] blk2_hoffset,
-    output wire [4:0] blk3_voffset,
-    output wire [4:0] blk3_hoffset,
-    output wire [4:0] blk4_voffset,
-    output wire [4:0] blk4_hoffset
+    output reg [4:0] blk1_voffset,
+    output reg [4:0] blk1_hoffset,
+    output reg [4:0] blk2_voffset,
+    output reg [4:0] blk2_hoffset,
+    output reg [4:0] blk3_voffset,
+    output reg [4:0] blk3_hoffset,
+    output reg [4:0] blk4_voffset,
+    output reg [4:0] blk4_hoffset
 );
 
     always @(posedge clk) begin
