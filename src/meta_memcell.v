@@ -11,7 +11,7 @@ module memcell (
     input wire write,
     input wire[2:0] set_my_color,
     output wire[2:0] my_color, // my wires, lend to gpu
-    output wire cell_occ, // is there anything inside of me
+    output wire cell_occ // is there anything inside of me
 );
 
     reg [2: 0] priv_mem;

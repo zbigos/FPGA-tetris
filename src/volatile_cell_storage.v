@@ -17,14 +17,14 @@ module cellstorage(
     input wire movement_commit,
     input wire movement_steal,
 
-    output reg[4:0] P1blk_v,
-    output reg[4:0] P1blk_h,
-    output reg[4:0] P2blk_v,
-    output reg[4:0] P2blk_h,
-    output reg[4:0] P3blk_v,
-    output reg[4:0] P3blk_h,
-    output reg[4:0] P4blk_v,
-    output reg[4:0] P4blk_h,
+    output wire[4:0] P1blk_v,
+    output wire[4:0] P1blk_h,
+    output wire[4:0] P2blk_v,
+    output wire[4:0] P2blk_h,
+    output wire[4:0] P3blk_v,
+    output wire[4:0] P3blk_h,
+    output wire[4:0] P4blk_v,
+    output wire[4:0] P4blk_h,
 
     output reg[2:0] volatile_blk_color
 );
