@@ -43,7 +43,7 @@ module VGAcore
     reg [3:0] proposed_b;
     reg [3:0] proposed_g;
 
-    wire h_drawing_pixels, v_drawing_pixels;
+    reg h_drawing_pixels, v_drawing_pixels;
     assign drawing_pixels = h_drawing_pixels & v_drawing_pixels;
 
     /*
